@@ -63,5 +63,12 @@
   },
   "directories": {
     "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleksandrmaksymenko/crm_apperture.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oleksandrmaksymenko/crm_apperture/issues"
   }
 }
