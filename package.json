@@ -1,16 +1,9 @@
 {
-  "name": "@ali-nuri/vite-tailwind-library",
+  "name": "@crm/uiKit",
   "description": "A library template built by Vite, React, Typescript, TailwindCSS and Storybook",
   "homepage": "https://github.com/ali-nuri/vite-tailwind-library#readme",
-  "author": "Ali Nuri",
+  "author": "Oleksandr Maksymnko",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ali-nuri/vite-tailwind-library.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ali-nuri/vite-tailwind-library/issues"
-  },
   "private": false,
   "version": "0.0.1",
   "main": "dist/ui-kit.umd.js",
