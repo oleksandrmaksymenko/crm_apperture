@@ -48,7 +48,7 @@ jobs:
         run: npm run build
 
       - name: NPM login
-        run: echo "@oleksandrmaksymenko:registry=https://npm.pkg.github.com //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+        run: echo -e "@oleksandrmaksymenko:registry=https://npm.pkg.github.com \n//npm.pkg.github.com/:_authToken=${secrets.TOKEN}" > ~/.npmrc
 
       - name: Publishing on NPM
         run: npm publish
