@@ -147,4 +147,8 @@ export const palette: any = {
     light: '#007bff',
     dark: '#333',
   },
+  popupBackground: {
+    light: 'rgba(0,0,0,0.5)',
+    dark: 'rgba(0,0,0,0.5)',
+  },
 };

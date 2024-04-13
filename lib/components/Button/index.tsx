@@ -1,7 +1,7 @@
 import {StyledButton} from './Button.styled';
 
 export type ButtonProps = {
-  variant?:
+  variant:
     | 'primary'
     | 'secondary'
     | 'tertiary'
@@ -12,12 +12,14 @@ export type ButtonProps = {
     | 'outline'
     | 'disabled'
     | 'text';
-  size?: 'small' | 'medium' | 'large' | 'xlarge';
+  size: 'small' | 'medium' | 'large' | 'xlarge';
+  onClick: () => void | null;
+} & Partial<{
   children: React.ReactNode;
-  icon?: React.ReactNode;
-  onClick?: () => void;
-  iconPosition?: 'left' | 'right';
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+  icon: React.ReactNode;
+  iconPosition: 'left' | 'right';
+}> &
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: React.FC<ButtonProps> = props => {
   return (

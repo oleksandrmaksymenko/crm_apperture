@@ -64,6 +64,11 @@ export const StyledButton = styled.button<ButtonStyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: ${({theme}) => theme.shadows.lg};
+  }
 
   ${({icon, iconPosition, theme}) => {
     if (icon) {
@@ -126,7 +131,7 @@ export const StyledButton = styled.button<ButtonStyledProps>`
     !children[1] &&
     icon &&
     `
-  padding: ${theme.spacing.sm};
-  border-radius: 50%;
+    padding: ${theme.spacing.sm};
+    border-radius: 50%;
   `})
 `;

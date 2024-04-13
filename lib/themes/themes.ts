@@ -1,8 +1,9 @@
-import {spacing} from './spacing.ts';
-import {shadows} from './shadows.ts';
-import {typography} from './typegraphy.ts';
-import {breakpoints} from './breakpoints.ts';
+import {spacing} from './spacing';
+import {shadows} from './shadows';
+import {typography} from './typegraphy';
+import {breakpoints} from './breakpoints';
 import {palette} from './palette';
+import {sizing} from './sizing';
 
 const lightPalette: any = {};
 const darkPalette: any = {};
@@ -32,6 +33,7 @@ export const lightTheme = {
   spacing,
   shadows,
   breakpoints,
+  sizing,
 };
 
 export const darkTheme = {
@@ -41,4 +43,5 @@ export const darkTheme = {
   spacing,
   shadows,
   breakpoints,
+  sizing,
 };
