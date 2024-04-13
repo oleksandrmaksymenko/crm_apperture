@@ -36,7 +36,7 @@ export const palette: any = {
   text: {
     primary: {
       light: grey[900],
-      dark: grey[900],
+      dark: grey[200],
     },
     secondary: {
       light: '#666',
