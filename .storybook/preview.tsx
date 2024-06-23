@@ -6,6 +6,10 @@ import {lightTheme, darkTheme} from '../lib/themes';
 const GlobalStyles = () => (
   <Global
     styles={css`
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial,
           sans-serif;

@@ -1,37 +1,42 @@
 import {Meta, StoryFn} from '@storybook/react';
 import Popup, {PopupProps} from './';
-import ButtonGroup from '../ButtonGroup';
 import {spacing} from '../../themes/spacing';
-import {ButtonProps} from '../Button';
+import {sizing} from '../../themes/sizing.ts';
 
 export default {
-  children: 'Button',
+  title: 'Components/Popup',
   component: Popup,
 } as Meta;
-
-const buttons: ButtonProps[] = [
-  {
-    children: 'Cancel',
-    variant: 'outline',
-    size: 'medium',
-    onClick: () => null,
-  },
-  {
-    children: 'Save',
-    variant: 'primary',
-    size: 'medium',
-    onClick: () => null,
-  },
-];
 
 const Template: StoryFn<PopupProps> = args => <Popup {...args} />;
 
 export const Primary = Template.bind({});
+export const WithFooter = Template.bind({});
+
 Primary.args = {
   children:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vulputate ut pharetra sit amet aliquam id. Sit amet nulla facilisi morbi tempus iaculis.',
   title: 'Popup',
   isOpen: true,
-  footer: <ButtonGroup buttons={buttons} gap={spacing.sm} />,
   size: 'md',
+  gutter: 'md',
+};
+
+Primary.argTypes = {
+  gutter: {
+    control: {type: 'select'},
+    options: Object.keys(spacing),
+  },
+  size: {
+    control: {type: 'select'},
+    options: Object.keys(sizing),
+  },
+  footer: {
+    control: {type: ''},
+  },
+};
+
+WithFooter.args = {
+  ...Primary.args,
+  footer: 'Some Footer',
 };

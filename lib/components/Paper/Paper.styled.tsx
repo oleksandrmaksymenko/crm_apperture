@@ -14,8 +14,9 @@ const elevationMap: {[key: number]: keyof typeof shadows} = {
 
 export const StyledPaper = styled.div<ThemeProps>`
   box-shadow: ${({theme, elevation}) => theme.shadows[elevationMap[elevation]]};
-  padding: ${({theme, rounded}) => theme.spacing[rounded || 'md']};
-  background-color: ${({theme}) => theme.colors.background};
+  padding: ${({theme, rounded, padding}) => theme.spacing[rounded || padding]};
+  background-color: ${({theme, bg}) =>
+    theme.colors[bg] || theme.colors.background};
   color: ${({theme}) => theme.text.primary};
   width: auto;
   max-width: 100%;

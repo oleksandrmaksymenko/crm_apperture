@@ -2,6 +2,7 @@ import {Meta, StoryFn} from '@storybook/react';
 import Avatar, {AvatarProps} from './';
 
 export default {
+  title: 'Components/Avatar',
   component: Avatar,
 } as Meta;
 
@@ -12,5 +13,11 @@ Primary.args = {
   name: 'Oleksandr Maksymenko',
   size: 'large',
   variant: 'circle',
-  isBadge: true,
+  notificationCount: 4,
+};
+
+Primary.argTypes = {
+  notificationCount: {
+    control: {type: 'number'},
+  },
 };

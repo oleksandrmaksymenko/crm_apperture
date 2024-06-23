@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import {AvatarProps} from './index.tsx';
+import {ThemeProps} from '../../themes';
 
 const sizes = {
-  small: '24px',
   medium: '40px',
   large: '56px',
 };
@@ -36,12 +36,22 @@ export const StyledAvatar = styled.div<
   },
 }));
 
-export const StyledAvatarBadge = styled.div<{isBool: boolean}>`
+export const StyledAvatarBadge = styled.div<
+  {
+    notificationColor: AvatarProps['notificationColor'];
+  } & ThemeProps
+>`
+  padding: 0 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   bottom: -6px;
-  right: -6px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  ${({isBool}) => isBool && 'background-color: #f33;'}
+  left: 70%;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: ${({theme}) => theme.colors.notification};
+  color: ${({theme}) => theme.text.primary};
+  font-size: ${({theme}) => theme.typography.fontSizes.xs};
 `;

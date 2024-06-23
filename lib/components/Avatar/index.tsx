@@ -1,12 +1,14 @@
 import {Children} from 'react';
 import {StyledAvatar, StyledAvatarBadge} from './Avatar.styled.tsx';
+import {ThemeColorType} from '../../global.types.ts';
 
 export type AvatarProps = Partial<{
-  size: 'small' | 'medium' | 'large';
+  size: 'medium' | 'large';
   variant: 'circle' | 'rounded';
   children: React.ReactNode;
   name: string;
-  isBadge: boolean | React.ReactNode;
+  notificationCount: number;
+  notificationColor: ThemeColorType;
 }>;
 
 const stringToColor = (string: string) => {
@@ -54,7 +56,8 @@ const getFontColor = (bgColor: string) => {
     return '#000';
   }
 
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const luminance = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255;
 
   // Choose white or black font color based on luminance
@@ -72,14 +75,12 @@ const Avatar = (props: AvatarProps) => {
     (child: any) => (child.type === 'img' ? child : null),
   );
 
-  const isBooleanBadge = typeof props.isBadge === 'boolean';
-
   const BadgeAvatar = () =>
-    props.isBadge && (
-      <StyledAvatarBadge
-        isBool={isBooleanBadge}
-        children={!isBooleanBadge && props.isBadge}
-      />
+    props.notificationCount &&
+    props.notificationCount > 0 && (
+      <StyledAvatarBadge notificationColor={props.notificationColor}>
+        {props.notificationCount}
+      </StyledAvatarBadge>
     );
 
   if (props.children)

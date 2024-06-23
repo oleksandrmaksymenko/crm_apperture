@@ -1,4 +1,5 @@
-import {green, grey} from './colors.ts';
+import {deepOrange, green, grey} from './colors.ts';
+import {elementPalette} from './elements/palette.ts';
 
 export const palette: any = {
   primary: {
@@ -92,8 +93,12 @@ export const palette: any = {
     dark: '#333',
   },
   border: {
-    light: '#ccc',
-    dark: '#333',
+    light: '#333',
+    dark: '#ccc',
+  },
+  borderActive: {
+    light: '#da0a0a',
+    dark: '#499b88',
   },
   shadow: {
     light: '#ccc',
@@ -151,4 +156,17 @@ export const palette: any = {
     light: 'rgba(0,0,0,0.5)',
     dark: 'rgba(0,0,0,0.5)',
   },
+  notification: {
+    light: deepOrange[800],
+    dark: deepOrange[800],
+  },
+  white: {
+    light: '#fff',
+    dark: '#fff',
+  },
+  black: {
+    light: '#000',
+    dark: '#000',
+  },
+  ...elementPalette,
 };
