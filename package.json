@@ -5,7 +5,7 @@
   "author": "Oleksandr Maksymnko",
   "license": "MIT",
   "private": false,
-  "version": "0.0.4",
+  "version": "0.0.6",
   "main": "dist/ui-kit.umd.js",
   "module": "dist/ui-kit.mjs",
   "types": "dist/main.d.ts",
