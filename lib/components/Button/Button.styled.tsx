@@ -15,7 +15,7 @@ const secondary = ({colors, text}: ThemeProps) => `
 `;
 
 const tertiary = ({colors, text}: ThemeProps) => `
- background-color: ${colors.tertiary};
+  background-color: ${colors.tertiary};
   color: ${text.tertiary};
 `;
 

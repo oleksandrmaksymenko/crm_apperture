@@ -35,8 +35,8 @@ const Popup: React.FC<PopupProps> = ({
   return (
     <StyledPopup {...props}>
       <StyledPopupOverlay onClick={() => onClose && onClose()} />
-      <StyledPopupContent {...{size}} gutter={props.gutter}>
-        <StyledPopupHeader>
+      <StyledPopupContent {...{size}} gutter={props.gutter} rounded='md'>
+        <StyledPopupHeader isTitle={title}>
           <h2 className='text-2xl font-semibold'>{title}</h2>
           <Button
             onClick={onClose}
