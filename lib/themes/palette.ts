@@ -1,75 +1,75 @@
-import {deepOrange, green, grey} from './colors.ts';
+import {deepOrange, green, indigo, lightGreen, teal, yellow} from './colors.ts';
 import {elementPalette} from './elements/palette.ts';
 
 export const palette: any = {
   primary: {
-    light: green[300],
+    light: teal[700],
     dark: green[300],
   },
   secondary: {
     light: '#ff0080',
-    dark: '#333',
+    dark: '#ff0080',
   },
   tertiary: {
-    light: '#333',
-    dark: '#333',
+    light: indigo['A700'],
+    dark: indigo[800],
   },
   default: {
-    light: '#fff',
-    dark: '#333',
+    light: green[50],
+    dark: lightGreen[50],
   },
   error: {
-    light: '#ff0000',
-    dark: '#333',
+    light: deepOrange[700],
+    dark: deepOrange[700],
   },
   warning: {
-    light: '#ffcc00',
-    dark: '#333',
+    light: yellow[800],
+    dark: yellow[800],
   },
   success: {
-    light: '#00cc00',
-    dark: '#333',
+    light: lightGreen[400],
+    dark: lightGreen[400],
   },
   info: {
-    light: '#0088cc',
-    dark: '#333',
+    light: teal[600],
+    dark: teal[600],
   },
   text: {
     primary: {
-      light: grey[900],
-      dark: grey[200],
+      light: '#111827',
+      dark: '#111827',
     },
     secondary: {
-      light: '#666',
-      dark: '#ccc',
+      light: '#fff',
+      dark: '#111827',
     },
     tertiary: {
-      light: '#999',
-      dark: '#999',
-    },
-    default: {
-      light: '#333',
+      light: '#fff',
       dark: '#fff',
     },
+    default: {
+      light: '#fff',
+      dark: '#111827',
+    },
     error: {
-      light: '#ff0000',
-      dark: '#ff0000',
+      light: '#fff',
+      dark: '#111827',
     },
     warning: {
-      light: '#ffcc00',
-      dark: '#ffcc00',
+      light: '#fff',
+      dark: '#111827',
     },
     success: {
-      light: '#00cc00',
-      dark: '#00cc00',
+      light: '#fff',
+      dark: '#111827',
     },
     info: {
-      light: '#0088cc',
-      dark: '#0088cc',
+      light: '#fff',
+      dark: '#fef',
     },
     link: {
-      light: '#007bff',
-      dark: '#007bff',
+      light: '#fff',
+      dark: '#111827',
     },
     disabled: {
       light: '#999',
@@ -89,8 +89,8 @@ export const palette: any = {
     },
   },
   background: {
-    light: '#fff',
-    dark: '#333',
+    light: '#fdfdff',
+    dark: '#111827',
   },
   border: {
     light: '#333',

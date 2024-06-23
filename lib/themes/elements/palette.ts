@@ -1,11 +1,13 @@
+import {blueGrey} from '../colors.ts';
+
 const selector = {
   selectorBorderColor: {
-    light: '#f33',
-    dark: '#005',
+    light: blueGrey[100],
+    dark: blueGrey[100],
   },
   selectorBackgroundColor: {
-    light: '#f33',
-    dark: '#005',
+    light: blueGrey[100],
+    dark: blueGrey[100],
   },
   selectorDisabledBorderColor: {
     light: '#4b1010',
@@ -15,9 +17,13 @@ const selector = {
     light: '#691515',
     dark: '#242479',
   },
+  selectorLabelText: {
+    light: '#111827',
+    dark: '#fefefe',
+  },
   checkboxSvgFill: {
     light: '#20a124',
-    dark: '#ea134e',
+    dark: '#111827',
   },
   checkboxDisabledSvgFill: {
     light: '#20a124',
@@ -60,7 +66,27 @@ const switcher = {
   },
 };
 
+const paper = {
+  paperBackgroundColor: {
+    light: '#fff',
+    dark: blueGrey[900],
+  },
+  paperTextColor: {
+    light: blueGrey[900],
+    dark: '#fff',
+  },
+};
+
+const popup = {
+  popupOverlayBackgroundColor: {
+    light: 'rgba(0,0,0,0.5)',
+    dark: 'rgba(0,0,0,0.5)',
+  },
+};
+
 export const elementPalette = {
   ...selector,
   ...switcher,
+  ...paper,
+  ...popup,
 };

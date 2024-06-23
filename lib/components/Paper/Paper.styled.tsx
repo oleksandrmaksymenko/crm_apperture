@@ -16,8 +16,8 @@ export const StyledPaper = styled.div<ThemeProps>`
   box-shadow: ${({theme, elevation}) => theme.shadows[elevationMap[elevation]]};
   padding: ${({theme, rounded, padding}) => theme.spacing[rounded || padding]};
   background-color: ${({theme, bg}) =>
-    theme.colors[bg] || theme.colors.background};
-  color: ${({theme}) => theme.text.primary};
+    theme.colors[bg] || theme.colors.paperBackgroundColor};
+  color: ${({theme}) => theme.colors.paperTextColor};
   width: auto;
   max-width: 100%;
   ${({theme, rounded}) =>

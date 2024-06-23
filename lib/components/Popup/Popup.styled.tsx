@@ -17,7 +17,7 @@ export const StyledPopup = styled.div<PopupStyledProps>`
 `;
 
 export const StyledPopupOverlay = styled.div<PopupStyledProps>`
-  background-color: ${({theme}) => theme.colors.popupBackground};
+  background-color: ${({theme}) => theme.colors.popupOverlayBackgroundColor};
   position: absolute;
   top: 0;
   left: 0;
@@ -27,21 +27,22 @@ export const StyledPopupOverlay = styled.div<PopupStyledProps>`
 `;
 
 export const StyledPopupContent = styled(Paper)<PopupStyledProps>`
-  color: ${({theme}) => theme.text.primary};
-  padding: ${({gutter, theme}) => theme.spacing[gutter || 'sm']};,
-  position: relative;
-  width: 100%;
-  max-width: ${({theme, size}) => theme.sizing[size]};
-  height: ${({size}) => (size === 'xl' ? '100%' : 'auto')};
   z-index: 2;
+  width: 100%;
+  position: relative;
   box-sizing: border-box;
+  max-width: ${({theme, size}) => theme.sizing[size]};
+  padding: ${({gutter, theme}) => theme.spacing[gutter || 'sm']};
+  height: ${({size}) => (size === 'xl' ? '100%' : 'auto')};
 `;
 
-export const StyledPopupHeader = styled.div<PopupStyledProps>`
+export const StyledPopupHeader = styled.div<
+  PopupStyledProps & {isHeader: boolean}
+>`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: ${({theme}) => theme.spacing.md};
+  justify-content: space-between;
+  margin-bottom: ${({theme, isHeader}) => (isHeader ? theme.spacing.md : 0)};
 
   h2 {
     margin: 0;

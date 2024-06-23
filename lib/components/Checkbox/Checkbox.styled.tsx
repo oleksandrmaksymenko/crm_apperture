@@ -68,6 +68,6 @@ export const StyledCheckbox = styled.input<StyledCheckboxProps>`
 
 export const StyledLabelText = styled.span<StyledCheckboxProps>`
   margin-left: 24px;
-  color: ${({theme}) => theme.colors.text};
+  color: ${({theme}) => theme.colors.selectorLabelText};
   font-size: ${({theme}) => theme.typography.fontSizes.md};
 `;
