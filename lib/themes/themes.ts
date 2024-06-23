@@ -5,10 +5,12 @@ import {breakpoints} from './breakpoints';
 import {palette} from './palette';
 import {sizing} from './sizing';
 
-const lightPalette: any = {};
-const darkPalette: any = {};
-const lightTextPalette: any = {};
-const darkTextPalette: any = {};
+type PaletteType = any;
+
+const lightPalette: PaletteType = {};
+const darkPalette: PaletteType = {};
+const lightTextPalette: PaletteType = {};
+const darkTextPalette: PaletteType = {};
 
 Object.keys(palette).forEach(key => {
   const lightValue = palette[key]['light'];
@@ -26,6 +28,8 @@ Object.keys(palette).forEach(key => {
   }
 });
 
+const transition = '0.3s';
+
 export const lightTheme = {
   colors: lightPalette,
   text: lightTextPalette,
@@ -34,6 +38,7 @@ export const lightTheme = {
   shadows,
   breakpoints,
   sizing,
+  transition,
 };
 
 export const darkTheme = {
@@ -44,4 +49,5 @@ export const darkTheme = {
   shadows,
   breakpoints,
   sizing,
+  transition,
 };

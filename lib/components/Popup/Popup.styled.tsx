@@ -3,7 +3,7 @@ import {PopupProps} from './index';
 import {ThemeProps} from '../../themes';
 import Paper from '../Paper';
 
-type PopupStyledProps = PopupProps & ThemeProps;
+type PopupStyledProps = PopupProps & ThemeProps & {isFooter: boolean};
 
 export const StyledPopup = styled.div<PopupStyledProps>`
   position: fixed;
@@ -28,11 +28,13 @@ export const StyledPopupOverlay = styled.div<PopupStyledProps>`
 
 export const StyledPopupContent = styled(Paper)<PopupStyledProps>`
   color: ${({theme}) => theme.text.primary};
+  padding: ${({gutter, theme}) => theme.spacing[gutter || 'sm']};,
   position: relative;
   width: 100%;
   max-width: ${({theme, size}) => theme.sizing[size]};
   height: ${({size}) => (size === 'xl' ? '100%' : 'auto')};
   z-index: 2;
+  box-sizing: border-box;
 `;
 
 export const StyledPopupHeader = styled.div<PopupStyledProps>`
@@ -48,8 +50,8 @@ export const StyledPopupHeader = styled.div<PopupStyledProps>`
 
 export const StyledPopupBody = styled.div<PopupStyledProps>`
   height: calc(${({theme, size}) => theme.sizing[size]} - 42px - 32px - 50px);
-  margin-bottom: ${({theme}) => theme.spacing.md};
-  overflow-y: scroll;
+  margin-bottom: ${({theme, isFooter}) => isFooter && theme.spacing.md};
+  overflow-y: auto;
 `;
 
 export const StyledPopupFooter = styled.div<PopupStyledProps>`

@@ -1,33 +1,37 @@
 import Button, {ButtonProps} from '../Button';
-import {StyledButtonGroup} from './ButtonGroup.styled.tsx';
-import {spacing} from '../../themes/spacing.ts';
+import {StyledButtonGroup} from './ButtonGroup.styled';
+import {SpacingType, ThemeColorType} from '../../global.types';
+import {spacing} from '../../themes/spacing';
 
 export type ButtonGroupProps = {
   buttons: ButtonProps[];
-  gap: (typeof spacing)[keyof typeof spacing];
 } & Partial<{
+  gap: SpacingType;
   direction: 'vertical' | 'horizontal';
   position: 'flex-start' | 'center' | 'flex-end';
-  bottomGutter: keyof typeof spacing;
+  bottomGutter: SpacingType;
+  bg: ThemeColorType;
+  padding: SpacingType;
+  isFullWidth: boolean;
 }>;
 
 const ButtonGroup = ({
   buttons,
   direction = 'horizontal',
-  gap,
+  gap = spacing.md,
   position,
   bottomGutter,
-}: ButtonGroupProps) => {
-  return (
-    <StyledButtonGroup
-      direction={direction}
-      gap={gap}
-      position={position}
-      bottomGutter={bottomGutter}
-    >
-      {!!buttons.length && buttons.map(button => <Button {...button} />)}
-    </StyledButtonGroup>
-  );
-};
+  ...rest
+}: ButtonGroupProps) => (
+  <StyledButtonGroup
+    {...{direction}}
+    {...{gap}}
+    {...{position}}
+    {...{bottomGutter}}
+    {...rest}
+  >
+    {!!buttons.length && buttons.map(button => <Button {...button} />)}
+  </StyledButtonGroup>
+);
 
 export default ButtonGroup;

@@ -8,7 +8,7 @@ import {
   StyledPopupOverlay,
 } from './Popup.styled.tsx';
 import Button from '../Button';
-import {sizing} from '../../themes/sizing.ts';
+import {SizingType, SpacingType, ThemeColorType} from '../../global.types.ts';
 
 export type PopupProps = {
   children: React.ReactNode;
@@ -17,27 +17,39 @@ export type PopupProps = {
   footer: React.ReactNode;
 } & Partial<{
   title: string;
-  size: (typeof sizing)[keyof typeof sizing];
+  size: SizingType;
+  gutter: SpacingType;
+  iconFill: ThemeColorType;
 }> &
   React.HTMLAttributes<HTMLDivElement>;
 
-const Popup: React.FC<PopupProps> = ({children, title, onClose, ...props}) => {
+const Popup: React.FC<PopupProps> = ({
+  children,
+  title,
+  onClose,
+  iconFill,
+  size,
+  footer,
+  ...props
+}) => {
   return (
     <StyledPopup {...props}>
       <StyledPopupOverlay onClick={() => onClose && onClose()} />
-      <StyledPopupContent size={props.size}>
+      <StyledPopupContent {...{size}} gutter={props.gutter}>
         <StyledPopupHeader>
           <h2 className='text-2xl font-semibold'>{title}</h2>
           <Button
             onClick={onClose}
-            icon={<CloseIcon />}
+            icon={<CloseIcon fill={iconFill || 'black'} />}
             variant='text'
             size='medium'
             iconPosition='right'
           />
         </StyledPopupHeader>
-        <StyledPopupBody size={props.size}>{children}</StyledPopupBody>
-        <StyledPopupFooter>{props.footer}</StyledPopupFooter>
+        <StyledPopupBody {...{size}} isFooter={!!footer}>
+          {children}
+        </StyledPopupBody>
+        <StyledPopupFooter>{footer}</StyledPopupFooter>
       </StyledPopupContent>
     </StyledPopup>
   );

@@ -54,6 +54,11 @@ const disabled = ({colors, text}: ThemeProps) => `
   background-color: ${colors.disabled};
   color: ${text.disabled};
   cursor: not-allowed;
+  pointer-events: none;
+  
+  &:hover {
+    box-shadow: none;
+  }
 `;
 
 export const StyledButton = styled.button<ButtonStyledProps>`
@@ -65,9 +70,16 @@ export const StyledButton = styled.button<ButtonStyledProps>`
   align-items: center;
   justify-content: center;
   transition: box-shadow 0.3s ease;
+  user-select: none;
+
+  ${({isFullSize}) => (isFullSize ? `width: 100%;` : '')}
 
   &:hover {
     box-shadow: ${({theme}) => theme.shadows.lg};
+  }
+
+  &:active {
+    box-shadow: none;
   }
 
   ${({icon, iconPosition, theme}) => {
@@ -79,6 +91,7 @@ export const StyledButton = styled.button<ButtonStyledProps>`
           }
         `;
       }
+
       return `
         & span {
           margin-right: ${theme.spacing.sm};

@@ -15,12 +15,12 @@ export const typography = {
     bold: 700,
   },
   lineHeights: {
-    xs: '16px',
-    sm: '20px',
-    md: '24px',
-    lg: '28px',
-    xl: '32px',
-    xxl: '36px',
+    xs: '8px',
+    sm: '12px',
+    md: '16px',
+    lg: '20px',
+    xl: '24px',
+    xxl: '28px',
   },
   letterSpacings: {
     xs: '0.5px',
