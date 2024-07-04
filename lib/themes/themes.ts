@@ -1,11 +1,11 @@
-import {spacing} from './spacing';
+import {gaps} from './gaps.ts';
 import {shadows} from './shadows';
 import {typography} from './typegraphy';
 import {breakpoints} from './breakpoints';
 import {palette} from './palette';
 import {sizing} from './sizing';
 
-type PaletteType = any;
+type PaletteType = {[key: string]: string};
 
 const lightPalette: PaletteType = {};
 const darkPalette: PaletteType = {};
@@ -34,7 +34,7 @@ export const lightTheme = {
   colors: lightPalette,
   text: lightTextPalette,
   typography,
-  spacing,
+  gaps,
   shadows,
   breakpoints,
   sizing,
@@ -45,7 +45,7 @@ export const darkTheme = {
   colors: darkPalette,
   text: darkTextPalette,
   typography,
-  spacing,
+  gaps,
   shadows,
   breakpoints,
   sizing,

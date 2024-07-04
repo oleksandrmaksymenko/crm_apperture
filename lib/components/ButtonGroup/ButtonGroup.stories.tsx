@@ -1,6 +1,6 @@
 import {Meta, StoryFn} from '@storybook/react';
 import ButtonGroup, {ButtonGroupProps} from './';
-import {spacing} from '../../themes/spacing';
+import {gaps} from '../../themes/gaps';
 import {darkTheme, lightTheme} from '../../themes';
 
 export default {
@@ -40,25 +40,25 @@ Primary.args = {
   ],
   direction: 'horizontal',
   position: 'center',
-  gap: spacing['sm-2'],
-  bottomGutter: spacing['lg'],
+  gap: gaps['sm-2'],
+  bottomGutter: gaps['lg'],
   bg: darkTheme.colors.primary,
-  padding: spacing['sm'],
+  padding: gaps['sm'],
   isFullWidth: true,
 };
 
 Primary.argTypes = {
   gap: {
     control: {type: 'select'},
-    options: Object.keys(spacing),
+    options: Object.keys(gaps),
   },
   bottomGutter: {
     control: {type: 'select'},
-    options: Object.keys(spacing),
+    options: Object.keys(gaps),
   },
   padding: {
     control: {type: 'select'},
-    options: Object.keys(spacing),
+    options: Object.keys(gaps),
   },
   bg: {
     control: {type: 'select'},

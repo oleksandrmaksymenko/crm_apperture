@@ -1,4 +1,4 @@
-export const spacing = {
+export const gaps = {
   xs: '4px',
   sm: '8px',
   'sm-2': '12px',

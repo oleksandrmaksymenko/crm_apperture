@@ -1,7 +1,7 @@
 import Button, {ButtonProps} from '../Button';
 import {StyledButtonGroup} from './ButtonGroup.styled';
 import {SpacingType, ThemeColorType} from '../../global.types';
-import {spacing} from '../../themes/spacing';
+import {gaps} from '../../themes/gaps.ts';
 
 export type ButtonGroupProps = {
   buttons: ButtonProps[];
@@ -18,7 +18,7 @@ export type ButtonGroupProps = {
 const ButtonGroup = ({
   buttons,
   direction = 'horizontal',
-  gap = spacing.md,
+  gap = gaps.md,
   position,
   bottomGutter,
   ...rest
