@@ -1,7 +1,7 @@
 import {Meta, StoryFn} from '@storybook/react';
 import Paper, {PaperProps} from './';
 import {lightTheme} from '../../themes';
-import {spacing} from '../../themes/spacing';
+import {gaps} from '../../themes/gaps';
 
 export default {
   title: 'Components/Paper',
@@ -30,11 +30,11 @@ Primary.argTypes = {
   },
   rounded: {
     control: {type: 'select'},
-    options: Object.keys(spacing),
+    options: Object.keys(gaps),
     default: '',
   },
   padding: {
     control: {type: 'select'},
-    options: Object.keys(spacing),
+    options: Object.keys(gaps),
   },
 };

@@ -1,6 +1,6 @@
 import {Meta, StoryFn} from '@storybook/react';
 import Popup, {PopupProps} from './';
-import {spacing} from '../../themes/spacing';
+import {gaps} from '../../themes/gaps';
 import {sizing} from '../../themes/sizing.ts';
 
 export default {
@@ -25,7 +25,7 @@ Primary.args = {
 Primary.argTypes = {
   gutter: {
     control: {type: 'select'},
-    options: Object.keys(spacing),
+    options: Object.keys(gaps),
   },
   size: {
     control: {type: 'select'},

@@ -2,7 +2,7 @@ import {Meta, StoryFn} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import Input, {InputProps} from './';
 import {SearchIcon} from '../../assets/icons';
-import {spacing} from '../../themes/spacing';
+import {gaps} from '../../themes/gaps';
 import {deepOrange} from '../../themes/colors';
 
 export default {
@@ -41,6 +41,6 @@ Primary.argTypes = {
   },
   size: {
     control: {type: 'select'},
-    options: Object.keys(spacing),
+    options: Object.keys(gaps),
   },
 };

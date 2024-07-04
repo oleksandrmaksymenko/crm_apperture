@@ -1,4 +1,4 @@
-import {spacing} from './spacing';
+import {gaps} from './gaps.ts';
 import {shadows} from './shadows';
 import {typography} from './typegraphy';
 import {breakpoints} from './breakpoints';
@@ -34,7 +34,7 @@ export const lightTheme = {
   colors: lightPalette,
   text: lightTextPalette,
   typography,
-  spacing,
+  gaps,
   shadows,
   breakpoints,
   sizing,
@@ -45,7 +45,7 @@ export const darkTheme = {
   colors: darkPalette,
   text: darkTextPalette,
   typography,
-  spacing,
+  gaps,
   shadows,
   breakpoints,
   sizing,

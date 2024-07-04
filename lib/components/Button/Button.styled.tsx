@@ -87,14 +87,14 @@ export const StyledButton = styled.button<ButtonStyledProps>`
       if (iconPosition === 'left') {
         return `
           & span {
-            margin-left: ${theme.spacing.sm};
+            margin-left: ${theme.gaps.sm};
           }
         `;
       }
 
       return `
         & span {
-          margin-right: ${theme.spacing.sm};
+          margin-right: ${theme.gaps.sm};
         }
       `;
     }
@@ -128,15 +128,15 @@ export const StyledButton = styled.button<ButtonStyledProps>`
   ${({size, theme}) => {
     switch (size) {
       case 'small':
-        return `padding: ${theme.spacing.xs} ${theme.spacing.sm}; font-size: ${theme.typography.fontSizes.sm};`;
+        return `padding: ${theme.gaps.xs} ${theme.gaps.sm}; font-size: ${theme.typography.fontSizes.sm};`;
       case 'medium':
-        return `padding: ${theme.spacing.sm} ${theme.spacing.md}; font-size: ${theme.typography.fontSizes.md};`;
+        return `padding: ${theme.gaps.sm} ${theme.gaps.md}; font-size: ${theme.typography.fontSizes.md};`;
       case 'large':
-        return `padding: ${theme.spacing['sm-2']} ${theme.spacing.lg}; font-size: ${theme.typography.fontSizes.lg};`;
+        return `padding: ${theme.gaps['sm-2']} ${theme.gaps.lg}; font-size: ${theme.typography.fontSizes.lg};`;
       case 'xlarge':
-        return `padding: ${theme.spacing.md} ${theme.spacing.xl}; font-size: ${theme.typography.fontSizes.xl};`;
+        return `padding: ${theme.gaps.md} ${theme.gaps.xl}; font-size: ${theme.typography.fontSizes.xl};`;
       default:
-        return `padding: ${theme.spacing.sm} ${theme.spacing.md}; font-size: ${theme.typography.fontSizes.md};`;
+        return `padding: ${theme.gaps.sm} ${theme.gaps.md}; font-size: ${theme.typography.fontSizes.md};`;
     }
   }}
   
@@ -144,7 +144,7 @@ export const StyledButton = styled.button<ButtonStyledProps>`
     !children[1] &&
     icon &&
     `
-    padding: ${theme.spacing.sm};
+    padding: ${theme.gaps.sm};
     border-radius: 50%;
   `})
 `;
