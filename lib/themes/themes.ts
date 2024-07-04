@@ -5,7 +5,7 @@ import {breakpoints} from './breakpoints';
 import {palette} from './palette';
 import {sizing} from './sizing';
 
-type PaletteType = {[key: string]: string};
+type PaletteType = any;
 
 const lightPalette: PaletteType = {};
 const darkPalette: PaletteType = {};
