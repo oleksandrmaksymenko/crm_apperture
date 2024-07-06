@@ -10,12 +10,12 @@ export const StyledButtonGroup = styled.div<StyledButtonGroupProps>(props => {
   return {
     width: props.isFullWidth ? '100%' : 'max-content',
     ...(props.bottomGutter && {
-      marginBottom: props.theme.spacing[props.bottomGutter],
+      marginBottom: props.theme.gaps[props.bottomGutter],
     }),
-    padding: props.theme.spacing[props.padding],
+    padding: props.theme.gaps[props.padding],
     display: 'flex',
     flexDirection: isVertical ? 'column' : 'row',
-    gap: props.theme.spacing[props.gap],
+    gap: props.theme.gaps[props.gap],
     ...(isVertical && {alignItems: props.position}),
     ...(!isVertical && {justifyContent: props.position}),
     backgroundColor: props.theme.colors[props.bg],

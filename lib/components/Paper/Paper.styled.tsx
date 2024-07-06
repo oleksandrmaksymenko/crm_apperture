@@ -14,12 +14,11 @@ const elevationMap: {[key: number]: keyof typeof shadows} = {
 
 export const StyledPaper = styled.div<ThemeProps>`
   box-shadow: ${({theme, elevation}) => theme.shadows[elevationMap[elevation]]};
-  padding: ${({theme, rounded, padding}) => theme.spacing[rounded || padding]};
+  padding: ${({theme, rounded, padding}) => theme.gaps[rounded || padding]};
   background-color: ${({theme, bg}) =>
     theme.colors[bg] || theme.colors.paperBackgroundColor};
   color: ${({theme}) => theme.colors.paperTextColor};
   width: auto;
   max-width: 100%;
-  ${({theme, rounded}) =>
-    rounded && `border-radius: ${theme.spacing[rounded]};`};
+  ${({theme, rounded}) => rounded && `border-radius: ${theme.gaps[rounded]};`};
 `;

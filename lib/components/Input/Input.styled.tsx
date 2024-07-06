@@ -8,7 +8,7 @@ export const StyledInputContainer = styled.div<StyledInputProps>`
   width: max-content;
   position: relative;
   display: flex;
-  gap: ${({theme}) => theme.spacing.md};
+  gap: ${({theme}) => theme.gaps.md};
 `;
 
 export const StyledInputControl = styled.div<StyledInputProps>`
@@ -20,8 +20,7 @@ export const StyledInputControl = styled.div<StyledInputProps>`
 export const StyledLabel = styled.label<StyledInputProps>`
   position: absolute;
   top: 5px;
-  left: ${({theme, isFocus}) =>
-    isFocus ? theme.spacing.xs : theme.spacing['sm-2']};
+  left: ${({theme, isFocus}) => (isFocus ? theme.gaps.xs : theme.gaps['sm-2'])};
   transition: all ${({theme}) => theme.transition};
   color: ${({theme}) => theme.text.primary};
   cursor: text;
@@ -29,7 +28,7 @@ export const StyledLabel = styled.label<StyledInputProps>`
   ${({isFocus, theme}) =>
     isFocus &&
     `
-    padding: ${theme.spacing.xs} ${theme.spacing.sm};
+    padding: ${theme.gaps.xs} ${theme.gaps.sm};
     font-size: ${theme.typography.fontSizes.xs};
     font-weight: ${theme.typography.fontWeights.light};
     line-height: ${theme.typography.lineHeights.xs};
@@ -39,7 +38,7 @@ export const StyledLabel = styled.label<StyledInputProps>`
 
 export const StyledInput = styled.input<StyledInputProps & {isError: boolean}>`
   width: ${({isFullWidth}) => (isFullWidth ? '100%' : 'auto')};
-  padding: ${({theme}) => `${theme.spacing.sm} ${theme.spacing['sm-2']}`};
+  padding: ${({theme}) => `${theme.gaps.sm} ${theme.gaps['sm-2']}`};
   background-color: transparent;
   border: none;
   border-bottom: 1px solid
@@ -67,7 +66,7 @@ export const StyledSuffix = styled.span<StyledInputProps>``;
 
 export const StyledDescription = styled.span<StyledInputProps>`
   ${({theme}) => `
-    margin-left: ${theme.spacing['sm-2']};
+    margin-left: ${theme.gaps['sm-2']};
     font-size: ${theme.typography.fontSizes.sm};
     font-weight: ${theme.typography.fontWeights.regular};
     line-height: ${theme.typography.lineHeights.lg};
@@ -77,7 +76,7 @@ export const StyledDescription = styled.span<StyledInputProps>`
 
 export const StyledError = styled.span<StyledInputProps>`
   ${({theme}) => `
-    margin-left: ${theme.spacing['sm-2']};
+    margin-left: ${theme.gaps['sm-2']};
     font-size: ${theme.typography.fontSizes.sm};
     font-weight: ${theme.typography.fontWeights.regular};
     line-height: ${theme.typography.lineHeights.lg};

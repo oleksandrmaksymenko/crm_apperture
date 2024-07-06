@@ -32,7 +32,7 @@ export const StyledPopupContent = styled(Paper)<PopupStyledProps>`
   position: relative;
   box-sizing: border-box;
   max-width: ${({theme, size}) => theme.sizing[size]};
-  padding: ${({gutter, theme}) => theme.spacing[gutter || 'sm']};
+  padding: ${({gutter, theme}) => theme.gaps[gutter || 'sm']};
   height: ${({size}) => (size === 'xl' ? '100%' : 'auto')};
 `;
 
@@ -42,7 +42,7 @@ export const StyledPopupHeader = styled.div<
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${({theme, isHeader}) => (isHeader ? theme.spacing.md : 0)};
+  margin-bottom: ${({theme, isHeader}) => (isHeader ? theme.gaps.md : 0)};
 
   h2 {
     margin: 0;
@@ -51,7 +51,7 @@ export const StyledPopupHeader = styled.div<
 
 export const StyledPopupBody = styled.div<PopupStyledProps>`
   height: calc(${({theme, size}) => theme.sizing[size]} - 42px - 32px - 50px);
-  margin-bottom: ${({theme, isFooter}) => isFooter && theme.spacing.md};
+  margin-bottom: ${({theme, isFooter}) => isFooter && theme.gaps.md};
   overflow-y: auto;
 `;
 
