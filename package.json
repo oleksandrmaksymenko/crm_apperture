@@ -5,7 +5,7 @@
   "author": "Oleksandr Maksymnko",
   "license": "MIT",
   "private": false,
-  "version": "0.0.4",
+  "version": "0.0.10",
   "main": "dist/ui-kit.umd.js",
   "module": "dist/ui-kit.mjs",
   "types": "dist/main.d.ts",
@@ -24,7 +24,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "storybook": "storybook dev -p 6006",
     "build": "tsc && vite build",
-    "build:storybook": "storybook build"
+    "build:storybook": "storybook build",
+    "changeVersion": "npm version"
   },
   "dependencies": {
     "react": "^18.2.0",

@@ -25,3 +25,5 @@ export type Dark = DarkMap[DarkName];
 export type ThemeProps = Light | Dark;
 
 export {lightTheme, darkTheme};
+
+export {StyledThemeProvider} from './StyledThemeProvider.tsx';

@@ -8,5 +8,5 @@ export const StyledSelectorGroupContainer = styled.div<StyledSelectorGroupProps>
   display: flex;
   flex-direction: ${({direction}) =>
     direction === 'vertical' ? 'column' : 'row'};
-  gap: ${({theme, gap}) => theme.spacing[gap]};
+  gap: ${({theme, gap}) => theme.gaps[gap]};
 `;

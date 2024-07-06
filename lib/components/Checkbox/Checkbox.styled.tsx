@@ -7,7 +7,7 @@ type StyledCheckboxProps = CheckboxProps & ThemeProps;
 export const StyledCheckboxContainer = styled.div<StyledCheckboxProps>`
   display: flex;
   align-items: center;
-  gap: ${({theme, gap}) => theme.spacing[gap]};
+  gap: ${({theme, gap}) => theme.gaps[gap]};
 `;
 
 export const StyledLabel = styled.label<StyledCheckboxProps>`

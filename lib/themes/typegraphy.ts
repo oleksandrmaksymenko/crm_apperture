@@ -30,4 +30,22 @@ export const typography = {
     xl: '2.5px',
     xxl: '3px',
   },
+  fontMixin: {
+    lg: {
+      fontSize: '18px',
+      lineHeight: '20px',
+    },
+    sm: {
+      fontSize: '14px',
+      lineHeight: '16px',
+    },
+    md: {
+      fontSize: '16px',
+      lineHeight: '18px',
+    },
+    xs: {
+      fontSize: '12px',
+      lineHeight: '14px',
+    },
+  },
 };
