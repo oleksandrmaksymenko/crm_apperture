@@ -5,17 +5,14 @@ import {
   StyledSwitcherLabel,
 } from './Switcher.styled.tsx';
 
-export type SwitcherProps = Partial<{
+export type SwitcherProps = {
   id: string;
-  label: string;
-  disabled: boolean;
   isChecked: boolean;
   onChange: (value: boolean) => void;
-}> &
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >;
+} & Partial<{
+  label: string;
+  disabled: boolean;
+}>;
 
 const Switcher = ({
   label,
@@ -30,6 +27,7 @@ const Switcher = ({
         type='checkbox'
         disabled={disabled}
         checked={isChecked}
+        id={id}
         {...props}
       />
       <StyledSwitcherLabel htmlFor={`${id}-switcher`} disabled={disabled}>
