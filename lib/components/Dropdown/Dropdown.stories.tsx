@@ -12,21 +12,23 @@ const Template: StoryFn<DropdownProps> = args => <Dropdown {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  title: 'Divider',
   label: 'Select',
   size: 'full',
   withoutIcon: true,
   list: [
     {
       title: 'Option 1',
+      id: 'option-1',
       icon: <StatMinusIcon />,
     },
     {
       title: 'Option 2',
+      id: 'option-2',
       icon: <StatMinusIcon />,
     },
     {
       title: 'Option 3',
+      id: 'option-3',
     },
   ],
   onSelect: action('on-select'),
