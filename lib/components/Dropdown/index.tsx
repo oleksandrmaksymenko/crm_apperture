@@ -1,13 +1,10 @@
 import {useState} from 'react';
-import Divider from '../Divider/index.tsx';
 import {
   StyledDropdownContainer,
   StyledDropdownLabelText,
   StyledDropdownListContainer,
   StyledDropdownListItem,
-  StyledDropdownTitle,
   StyledDropdownToggle,
-  StyledDropdownToggleTitleContainer,
   StyledIconContainer,
 } from './Dropdown.styled.tsx';
 import {StatMinusIcon} from '../../assets/icons';
@@ -16,13 +13,13 @@ import {ThemeProps} from '../../themes';
 
 export type DropdownProps = {
   label: string;
-  onSelect: (arg: string) => void;
+  onSelect: (arg: {value: string; id: string}) => void;
   list: {
     title: string;
+    id: string;
     icon?: React.ReactNode;
   }[];
 } & Partial<{
-  title: string;
   size: 'full' | 'content';
   listSize: 'sm' | 'md' | 'lg';
   withoutIcon: boolean;
@@ -31,13 +28,13 @@ export type DropdownProps = {
 }>;
 
 const Dropdown = ({
-  title,
   label,
   withoutIcon,
   list,
   onSelect,
   isChooseSelect,
   listSize = 'md',
+  size,
   ...rest
 }: DropdownProps) => {
   const [labelText, setLabelText] = useState<string>(label);
@@ -50,15 +47,17 @@ const Dropdown = ({
 
   const handleSelect = (e: React.BaseSyntheticEvent<HTMLDivElement>) => {
     const value = e.target.attributes['data-selected']?.textContent;
-    if (value) {
-      onSelect(value);
+    const id = e.target.id;
+    if (value || id) {
+      console.log(value, id);
+      onSelect({value, id});
       if (isChooseSelect) setLabelText(value);
       setIsDropdownShow(false);
     }
   };
 
   return (
-    <StyledDropdownContainer {...rest}>
+    <StyledDropdownContainer {...{size}} {...rest}>
       <StyledDropdownLabelText onClick={toggleDropdown} {...{listSize}}>
         {labelText}
         {!withoutIcon && (
@@ -70,19 +69,15 @@ const Dropdown = ({
       <StyledDropdownToggle
         isDropdownShow={isDropdownShow}
         onClick={handleSelect}
+        {...{size}}
         {...{listSize}}
       >
-        {title && (
-          <StyledDropdownToggleTitleContainer>
-            <StyledDropdownTitle>title</StyledDropdownTitle>
-            <Divider />
-          </StyledDropdownToggleTitleContainer>
-        )}
         <StyledDropdownListContainer>
           {list &&
             list.map(item => (
               <StyledDropdownListItem
                 key={item.title}
+                id={item.id}
                 data-selected={item.title}
               >
                 {item.icon && item.icon}

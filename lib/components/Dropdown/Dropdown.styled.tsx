@@ -5,19 +5,20 @@ import {DropdownProps} from './index.tsx';
 type StyledDropdownProps = DropdownProps & ThemeProps;
 
 const listSizes: {
-  [key: string]: {left: number | string; right: string | number};
+  [key: string]: Partial<{
+    left: number | string;
+    right: string | number;
+    width: number | string;
+  }>;
 } = {
   sm: {
-    left: '40%',
-    right: '40%',
+    width: 200,
   },
   md: {
-    left: '10%',
-    right: '10%',
+    width: 400,
   },
   lg: {
-    left: '8px',
-    right: '8px',
+    width: 600,
   },
 };
 
@@ -42,12 +43,15 @@ export const StyledDropdownLabelText = styled.div<StyledDropdownProps>`
   border: 1px solid ${({theme}) => theme.colors.dropdownBorderColor};
   padding: ${({theme}) => theme.gaps.sm};
   color: ${({theme}) => theme.colors.dropdownLabelColor};
+  background-color: ${({theme}) =>
+    theme.colors.dropdownContainerBackgroundColor};
   border-radius: 4px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: ${({theme}) => theme.gaps.sm};
+
   ${({listSize, theme}) => {
     if (listSize) {
       return {
@@ -58,11 +62,9 @@ export const StyledDropdownLabelText = styled.div<StyledDropdownProps>`
 
     return null;
   }}
-`;
 
-export const StyledDropdownTitle = styled.h3<StyledDropdownProps>`
-  pointer-events: none;
-  margin: 0;
+  right: inherit;
+  left: inherit;
 `;
 
 export const StyledDropdownToggle = styled.div<StyledDropdownProps>`
@@ -73,8 +75,8 @@ export const StyledDropdownToggle = styled.div<StyledDropdownProps>`
   box-sizing: content-box;
   transition: max-height ${({theme}) => theme.transition};
 
-  ${({listSize, listPosition, theme}) => {
-    if (listSize) {
+  ${({listSize, listPosition, theme, size}) => {
+    if (listSize && size === 'content') {
       return {
         ...listSizes[listSize],
         ...theme.typography.fontMixin[listSize],
@@ -93,10 +95,6 @@ export const StyledDropdownToggle = styled.div<StyledDropdownProps>`
       ...theme.typography.fontMixin.md,
     };
   }}
-`;
-
-export const StyledDropdownToggleTitleContainer = styled.div<StyledDropdownProps>`
-  pointer-events: none;
 `;
 
 export const StyledIconContainer = styled.div<StyledDropdownProps>`
