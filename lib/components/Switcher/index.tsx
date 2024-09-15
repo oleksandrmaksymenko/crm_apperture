@@ -20,21 +20,19 @@ const Switcher = ({
   disabled,
   isChecked,
   ...props
-}: SwitcherProps) => {
-  return (
-    <StyledSwitcherContainer>
-      <StyledSwitcherInput
-        type='checkbox'
-        disabled={disabled}
-        checked={isChecked}
-        id={id}
-        {...props}
-      />
-      <StyledSwitcherLabel htmlFor={`${id}-switcher`} disabled={disabled}>
-        {label && <StyledLabelText>{label}</StyledLabelText>}
-      </StyledSwitcherLabel>
-    </StyledSwitcherContainer>
-  );
-};
+}: SwitcherProps) => (
+  <StyledSwitcherContainer>
+    <StyledSwitcherInput
+      type='checkbox'
+      disabled={disabled}
+      checked={isChecked}
+      id={`${id}-switcher`}
+      {...props}
+    />
+    <StyledSwitcherLabel htmlFor={`${id}-switcher`} disabled={disabled}>
+      {label && <StyledLabelText>{label}</StyledLabelText>}
+    </StyledSwitcherLabel>
+  </StyledSwitcherContainer>
+);
 
 export default Switcher;

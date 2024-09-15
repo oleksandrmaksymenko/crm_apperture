@@ -24,6 +24,7 @@ export const StyledSwitcherInput = styled.input<StyledSwitcherProps>`
 export const StyledSwitcherLabel = styled.label<StyledSwitcherProps>`
   position: relative;
   user-select: none;
+  cursor: pointer;
 
   &:before {
     content: '';

@@ -111,7 +111,7 @@ export const StyledDropdownListContainer = styled.ul<StyledDropdownProps>`
   padding: 0;
   border-radius: 8px;
   background-color: ${({theme}) =>
-    theme.colors.DropdownListContainerBackgroundColor};
+    theme.colors.dropdownListContainerBackgroundColor};
 
   svg {
     pointer-events: none;

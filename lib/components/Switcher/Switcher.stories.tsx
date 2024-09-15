@@ -13,8 +13,8 @@ export const Primary = Template.bind({});
 Primary.args = {
   onChange: action('on-change'),
   disabled: true,
-  isChecked: true,
   label: 'Company name',
+  id: 'test',
 };
 
 Primary.argTypes = {};

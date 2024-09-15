@@ -1,7 +1,7 @@
 import {Meta, StoryFn} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import Button, {ButtonProps} from './';
-import {CloseIcon} from '../../assets/icons';
+import {MoreVerticalIcon} from '../../assets/icons';
 
 export default {
   title: 'Components/Button',
@@ -15,7 +15,7 @@ Primary.args = {
   children: 'Click me',
   variant: 'primary',
   size: 'medium',
-  icon: <CloseIcon />,
+  icon: <MoreVerticalIcon />,
   iconPosition: 'left',
   isFullSize: true,
   onClick: action('on-click'),
