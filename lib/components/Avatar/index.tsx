@@ -7,7 +7,7 @@ export type AvatarProps = Partial<{
   variant: 'circle' | 'rounded';
   children: React.ReactNode;
   name: string;
-  notificationCount: number;
+  notificationCount?: number;
   notificationColor: ThemeColorType;
 }>;
 
@@ -79,7 +79,7 @@ const Avatar = (props: AvatarProps) => {
     props.notificationCount &&
     props.notificationCount > 0 && (
       <StyledAvatarBadge notificationColor={props.notificationColor}>
-        {props.notificationCount}
+        {props.notificationCount > 999 ? '999+' : props.notificationCount}
       </StyledAvatarBadge>
     );
 
@@ -92,6 +92,8 @@ const Avatar = (props: AvatarProps) => {
     );
 
   const avatarName = stringAvatar(props.name || '');
+
+  console.log(avatarName);
 
   return (
     <StyledAvatar

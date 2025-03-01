@@ -107,11 +107,11 @@ export const StyledIconContainer = styled.div<StyledDropdownProps>`
 `;
 
 export const StyledDropdownListContainer = styled.ul<StyledDropdownProps>`
-  margin: ${({theme}) => theme.gaps.sm} 0 0 0;
+  margin: 0;
   padding: 0;
   border-radius: 8px;
   background-color: ${({theme}) =>
-    theme.colors.DropdownListContainerBackgroundColor};
+    theme.colors.dropdownListContainerBackgroundColor};
 
   svg {
     pointer-events: none;

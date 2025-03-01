@@ -13,11 +13,6 @@ Primary.args = {
   name: 'Oleksandr Maksymenko',
   size: 'large',
   variant: 'circle',
-  notificationCount: 4,
 };
 
-Primary.argTypes = {
-  notificationCount: {
-    control: {type: 'number'},
-  },
-};
+Primary.argTypes = {};

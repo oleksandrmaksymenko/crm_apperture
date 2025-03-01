@@ -117,7 +117,7 @@ const dropdown = {
     light: blueGrey[300],
     dark: blueGrey[100],
   },
-  DropdownListContainerBackgroundColor: {
+  dropdownListContainerBackgroundColor: {
     light: grey[300],
     dark: blueGrey[100],
   },
@@ -130,6 +130,75 @@ const divider = {
   },
 };
 
+const table = {
+  tableBorderColor: {
+    light: grey[500],
+    dark: grey[100],
+  },
+  tableHeaderColor: {
+    light: blueGrey[100],
+    dark: blueGrey[100],
+  },
+  tableHeaderBackgroundColor: {
+    light: grey[500],
+    dark: grey[100],
+  },
+  tableRowActiveBackgroundColor: {
+    light: grey[500],
+    dark: grey[100],
+  },
+  tableRowHoverBackgroundColor: {
+    light: grey[400],
+    dark: grey[50],
+  },
+  tableRowHoverColor: {
+    light: grey[900],
+    dark: grey[500],
+  },
+  tableBodyColor: {
+    light: blueGrey[100],
+    dark: blueGrey[100],
+  },
+  tableRowIconFillColor: {
+    light: grey[900],
+    dark: grey[500],
+  },
+};
+
+const menu = {
+  menuListBackgroundColor: {
+    light: blueGrey[100],
+    dark: blueGrey[100],
+  },
+  menuItemHoverBackgroundColor: {
+    light: blueGrey[200],
+    dark: blueGrey[200],
+  },
+  menuItemColor: {
+    light: blueGrey[900],
+    dark: blueGrey[900],
+  },
+  menuItemHoverColor: {
+    light: blueGrey[500],
+    dark: blueGrey[500],
+  },
+};
+
+const link = {
+  linkColor: {
+    light: deepOrange[100],
+    dark: deepOrange[500],
+  },
+  linkColorHover: {
+    light: deepOrange[300],
+    dark: deepOrange[700],
+  },
+  linkUnderlineColor: {
+    light: deepOrange[100],
+    dark: deepOrange[500],
+  },
+};
+
 export const elementPalette = {
   ...selector,
   ...switcher,
@@ -137,4 +206,7 @@ export const elementPalette = {
   ...popup,
   ...divider,
   ...dropdown,
+  ...table,
+  ...menu,
+  ...link,
 };
