@@ -165,6 +165,40 @@ const table = {
   },
 };
 
+const menu = {
+  menuListBackgroundColor: {
+    light: blueGrey[100],
+    dark: blueGrey[100],
+  },
+  menuItemHoverBackgroundColor: {
+    light: blueGrey[200],
+    dark: blueGrey[200],
+  },
+  menuItemColor: {
+    light: blueGrey[900],
+    dark: blueGrey[900],
+  },
+  menuItemHoverColor: {
+    light: blueGrey[500],
+    dark: blueGrey[500],
+  },
+};
+
+const link = {
+  linkColor: {
+    light: deepOrange[100],
+    dark: deepOrange[500],
+  },
+  linkColorHover: {
+    light: deepOrange[300],
+    dark: deepOrange[700],
+  },
+  linkUnderlineColor: {
+    light: deepOrange[100],
+    dark: deepOrange[500],
+  },
+};
+
 export const elementPalette = {
   ...selector,
   ...switcher,
@@ -173,4 +207,6 @@ export const elementPalette = {
   ...divider,
   ...dropdown,
   ...table,
+  ...menu,
+  ...link,
 };

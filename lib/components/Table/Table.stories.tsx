@@ -1,12 +1,18 @@
 import {Meta, StoryFn} from '@storybook/react';
-import TableContainer, {TableContainerProps} from './TableContainer';
+import TableContainer, {
+  TableContainerType,
+  TableContainerTypeProps,
+} from './TableContainer';
+import MenuList from '../Menu/MenuList';
+import MenuItem from '../Menu/MenuItem';
+import Position from '../Position';
 
 export default {
   title: 'Components/Table',
   component: TableContainer,
 } as Meta;
 
-const tableConfig = [
+const tableConfig: TableContainerType['tableConfig'][] = [
   {
     head: [
       {
@@ -24,54 +30,47 @@ const tableConfig = [
         sortBy: 'companyName',
         onClick: (arg?: unknown) => arg,
       },
-      {
-        title: 'companyName',
-        sortBy: 'companyName',
-        onClick: (arg?: unknown) => arg,
-      },
     ],
     bodyProps: {
       title: 'title',
       name: 'name',
       companyName: 'companyName',
-      companyName2: 'companyName2',
     },
     body: [
       {
         title: '1',
         name: 'string',
         companyName: 'Test Name',
-        companyName2: 'Test Name2',
+        Menu: () => (
+          <Position placement='top-end'>
+            <MenuList>
+              <MenuItem>First Item</MenuItem>
+              <MenuItem>First Item</MenuItem>
+              <MenuItem>First Item</MenuItem>
+              <MenuItem>First Item</MenuItem>
+              <MenuItem>First Item</MenuItem>
+              <MenuItem>First Item</MenuItem>
+            </MenuList>
+          </Position>
+        ),
       },
       {
-        title: '1',
+        title: '2',
         name: 'string',
         companyName: 'Test Name',
-        companyName2: 'Test Name2',
       },
       {
-        title: '1',
+        title: '3',
         name: 'string',
         companyName: 'Test Name',
-        companyName2: 'Test Name2',
-      },
-      {
-        title: '1',
-        name: 'string',
-        companyName: 'Test Name',
-        companyName2: 'Test Name2',
-      },
-      {
-        title: '1',
-        name: 'string',
-        companyName: 'Test Name',
-        companyName2: 'Test Name2',
       },
     ],
+    withCheckbox: false,
+    withActions: true,
   },
 ];
 
-const Template: StoryFn<TableContainerProps> = args => (
+const Template: StoryFn<TableContainerTypeProps> = args => (
   <TableContainer {...args} />
 );
 

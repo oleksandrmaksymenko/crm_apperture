@@ -56,6 +56,8 @@ const Dropdown = ({
     }
   };
 
+  console.log(listSize);
+
   return (
     <StyledDropdownContainer {...{size}} {...rest}>
       <StyledDropdownLabelText onClick={toggleDropdown} {...{listSize}}>

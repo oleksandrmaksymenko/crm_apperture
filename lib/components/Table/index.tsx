@@ -3,7 +3,7 @@ import TableHead from './TableHead.tsx';
 import TableRow from './TableRow.tsx';
 
 export default () => ({
-  TableContainer,
-  TableHead,
-  TableRow,
+  Container: TableContainer,
+  Head: TableHead,
+  Row: TableRow,
 });

@@ -1,11 +1,15 @@
 import styled from '@emotion/styled';
 import {ThemeProps} from '../../themes';
-import {TableContainerProps} from './TableContainer.tsx';
+import {TableContainerTypeProps} from './TableContainer.tsx';
 
-type StyledInputGroupProps = TableContainerProps & ThemeProps;
+type StyledInputGroupProps = TableContainerTypeProps & ThemeProps;
 
-const tableTemplateColumn = (length: number): string =>
-  `40px repeat(${length}, 1fr) 42px`;
+const tableTemplateColumn = (
+  length: number,
+  withCheckbox: boolean,
+  withActions: boolean,
+): string =>
+  `${withCheckbox ? '40px' : ''} minmax(40px, 60px) repeat(${length - 1}, 1fr) ${withActions ? '42px' : ''}`;
 
 export const StyledTable = styled.div<StyledInputGroupProps>`
   ${({theme}) => ({
@@ -18,10 +22,13 @@ export const StyledTable = styled.div<StyledInputGroupProps>`
 export const StyledTableHead = styled.div<
   StyledInputGroupProps & {
     length: number;
+    withCheckbox: boolean;
+    withActions: boolean;
   }
 >`
   display: grid;
-  grid-template-columns: ${({length}) => tableTemplateColumn(length)};
+  grid-template-columns: ${({length, withCheckbox, withActions}) =>
+    tableTemplateColumn(length, withCheckbox, withActions)};
 
   ${({theme}) => ({
     color: theme.colors.tableHeaderColor,
@@ -43,8 +50,10 @@ export const StyledTableRow = styled.div<
     length: number;
   }
 >`
+  height: 42px;
   display: grid;
-  grid-template-columns: ${({length}) => tableTemplateColumn(length)};
+  grid-template-columns: ${({length, withCheckbox, withActions}) =>
+    tableTemplateColumn(length, withCheckbox, withActions)};
   padding-left: 8px;
 
   ${({isSelected, theme}) => ({
@@ -56,15 +65,14 @@ export const StyledTableRow = styled.div<
   ${({theme}) => ({
     color: theme.colors.tableBodyColor,
   })};
-
-  &:hover {
-    ${({theme}) => ({
-      backgroundColor: theme.colors.tableRowHoverBackgroundColor,
-      color: theme.colors.tableRowHoverColor,
-    })}
-  }
 `;
 
 export const StyledTableCell = styled.div<StyledInputGroupProps>`
   padding: 4px;
+  display: flex;
+  align-items: center;
+`;
+
+export const StyledActionsContainer = styled.div`
+  position: relative;
 `;
