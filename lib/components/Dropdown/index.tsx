@@ -56,8 +56,6 @@ const Dropdown = ({
     }
   };
 
-  console.log(listSize);
-
   return (
     <StyledDropdownContainer {...{size}} {...rest}>
       <StyledDropdownLabelText onClick={toggleDropdown} {...{listSize}}>
@@ -78,7 +76,7 @@ const Dropdown = ({
           {list &&
             list.map(item => (
               <StyledDropdownListItem
-                key={item.title}
+                key={item.id}
                 id={item.id}
                 data-selected={item.title}
               >

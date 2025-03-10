@@ -14,11 +14,15 @@ Primary.args = {
   href: '#',
   underline: '',
   size: 'sm',
+  selected: false,
 };
 
 Primary.argTypes = {
   size: {
     control: {type: 'select'},
     options: Object.keys(typography.fontMixin),
+  },
+  selected: {
+    control: {type: 'boolean'},
   },
 };
