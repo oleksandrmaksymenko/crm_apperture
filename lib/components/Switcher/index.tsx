@@ -8,7 +8,7 @@ import {
 export type SwitcherProps = {
   id: string;
   isChecked: boolean;
-  onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & Partial<{
   label: string;
   disabled: boolean;

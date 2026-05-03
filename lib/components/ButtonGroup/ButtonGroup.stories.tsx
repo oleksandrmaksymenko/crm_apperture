@@ -50,6 +50,7 @@ Primary.args = {
 Primary.argTypes = {
   gap: {
     control: {type: 'select'},
+    defaultValue: gaps.md,
     options: Object.keys(gaps),
   },
   bottomGutter: {
@@ -63,5 +64,10 @@ Primary.argTypes = {
   bg: {
     control: {type: 'select'},
     options: Object.keys(lightTheme.colors),
+  },
+  direction: {
+    control: {type: 'select'},
+    defaultValue: 'vertical',
+    options: ['vertical', 'horizontal'],
   },
 };

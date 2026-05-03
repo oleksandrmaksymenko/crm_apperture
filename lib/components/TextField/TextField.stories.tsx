@@ -1,20 +1,18 @@
 import {Meta, StoryFn} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
-import Input, {InputProps} from './';
+import TextField, {TextFieldProps} from './';
 import {SearchIcon} from '../../assets/icons';
-import {gaps} from '../../themes/gaps';
 import {deepOrange} from '../../themes/colors';
 
 export default {
-  title: 'Components/Input',
-  component: Input,
+  title: 'Components/TextField',
+  component: TextField,
 } as Meta;
 
-const Template: StoryFn<InputProps> = args => <Input {...args} />;
+const Template: StoryFn<TextFieldProps> = args => <TextField {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  type: 'text',
   placeholder: 'Wright a name',
   onChange: action('onChange'),
   onFocus: action('onFocus'),
@@ -23,8 +21,8 @@ Primary.args = {
   id: 'test-input',
   icon: <SearchIcon fill={deepOrange[800]} />,
   iconPosition: 'right',
-  // prefix: 'prefix',
-  // suffix: 'suffix',
+  prefix: '',
+  suffix: 'suffix',
   description: 'Description',
   error: '',
   isFullWidth: false,
@@ -32,15 +30,11 @@ Primary.args = {
 };
 
 Primary.argTypes = {
-  icon: {
-    control: {type: ''},
-  },
   iconPosition: {
     control: {type: 'select'},
     options: ['left', 'right'],
   },
-  size: {
-    control: {type: 'select'},
-    options: Object.keys(gaps),
+  placeholder: {
+    control: {type: 'text'},
   },
 };

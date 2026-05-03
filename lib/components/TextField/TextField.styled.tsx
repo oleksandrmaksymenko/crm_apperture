@@ -1,23 +1,30 @@
 import styled from '@emotion/styled';
-import {InputProps} from './index.tsx';
+import {TextFieldProps} from './index.tsx';
 import {ThemeProps} from '../../themes';
 
-type StyledInputProps = InputProps & ThemeProps;
+type StyledTextFieldProps = TextFieldProps & ThemeProps;
 
-export const StyledInputContainer = styled.div<StyledInputProps>`
-  width: max-content;
+export const StyledTextFieldContainer = styled.div<StyledTextFieldProps>`
   position: relative;
-  display: flex;
   gap: ${({theme}) => theme.gaps.md};
+  ${({isFullWidth}) =>
+    isFullWidth
+      ? `
+          width: 100%;
+          display: block;
+        `
+      : 'display: flex;'};
 `;
 
-export const StyledInputControl = styled.div<StyledInputProps>`
+export const StyledTextFieldControl = styled.div<StyledTextFieldProps>`
   position: relative;
   display: flex;
   flex-direction: column;
 `;
 
-export const StyledLabel = styled.label<StyledInputProps>`
+export const StyledLabel = styled.label<
+  StyledTextFieldProps & {isLeftIconPosition: boolean; isPrefix: boolean}
+>`
   position: absolute;
   top: 5px;
   left: ${({theme, isFocus}) => (isFocus ? theme.gaps.xs : theme.gaps['sm-2'])};
@@ -34,9 +41,14 @@ export const StyledLabel = styled.label<StyledInputProps>`
     line-height: ${theme.typography.lineHeights.xs};
     top: -12px;
   `}
+
+  ${({isLeftIconPosition}) => isLeftIconPosition && 'padding-left: 12px'}
+  ${({isPrefix}) => isPrefix && 'padding-left: 5px'}
 `;
 
-export const StyledInput = styled.input<StyledInputProps & {isError: boolean}>`
+export const StyledTextField = styled.input<
+  StyledTextFieldProps & {isError: boolean}
+>`
   width: ${({isFullWidth}) => (isFullWidth ? '100%' : 'auto')};
   padding: ${({theme}) => `${theme.gaps.sm} ${theme.gaps['sm-2']}`};
   background-color: transparent;
@@ -49,10 +61,13 @@ export const StyledInput = styled.input<StyledInputProps & {isError: boolean}>`
   &:focus {
     outline: none;
   }
+
+  ${({isLeftIconPosition}) => isLeftIconPosition && 'padding-left: 20px'}
+  ${({isPrefix}) => isPrefix && 'padding-left: 25px'}
 `;
 
 export const StyledIconContainer = styled.div<
-  StyledInputProps & {isLeft: boolean}
+  StyledTextFieldProps & {isLeft: boolean}
 >`
   position: absolute;
   top: 5px;
@@ -60,11 +75,24 @@ export const StyledIconContainer = styled.div<
   ${({isLeft}) => (isLeft ? `left: 0` : `right: 0`)}
 `;
 
-export const StyledPrefix = styled.span<StyledInputProps>``;
+const PrefixSuffix = styled.span`
+  max-width: 25px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  top: 4px;
+`;
 
-export const StyledSuffix = styled.span<StyledInputProps>``;
+export const StyledPrefix = styled(PrefixSuffix)<StyledTextFieldProps>`
+  left: 0;
+`;
 
-export const StyledDescription = styled.span<StyledInputProps>`
+export const StyledSuffix = styled(PrefixSuffix)<StyledTextFieldProps>`
+  right: 0;
+`;
+
+export const StyledDescription = styled.span<StyledTextFieldProps>`
   ${({theme}) => `
     margin-left: ${theme.gaps['sm-2']};
     font-size: ${theme.typography.fontSizes.sm};
@@ -74,7 +102,7 @@ export const StyledDescription = styled.span<StyledInputProps>`
   `}
 `;
 
-export const StyledError = styled.span<StyledInputProps>`
+export const StyledError = styled.span<StyledTextFieldProps>`
   ${({theme}) => `
     margin-left: ${theme.gaps['sm-2']};
     font-size: ${theme.typography.fontSizes.sm};
