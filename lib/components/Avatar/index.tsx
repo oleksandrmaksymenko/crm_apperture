@@ -93,8 +93,6 @@ const Avatar = (props: AvatarProps) => {
 
   const avatarName = stringAvatar(props.name || '');
 
-  console.log(avatarName);
-
   return (
     <StyledAvatar
       {...props}
