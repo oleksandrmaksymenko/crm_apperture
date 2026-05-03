@@ -49,4 +49,9 @@ export const StyledLink = styled.a<LinkStyledProps>`
   &:hover {
     color: ${({theme}) => theme.colors.linkColorHover};
   }
+
+  ${({selected, theme}) =>
+    selected && {
+      color: theme.colors.linkColorSelected,
+    }}
 `;

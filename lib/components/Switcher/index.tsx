@@ -8,10 +8,11 @@ import {
 export type SwitcherProps = {
   id: string;
   isChecked: boolean;
-  onChange: (value: boolean) => void;
+  onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 } & Partial<{
   label: string;
   disabled: boolean;
+  dataTest: string;
 }>;
 
 const Switcher = ({
@@ -19,6 +20,7 @@ const Switcher = ({
   id,
   disabled,
   isChecked,
+  dataTest,
   ...props
 }: SwitcherProps) => (
   <StyledSwitcherContainer>
@@ -26,6 +28,7 @@ const Switcher = ({
       type='checkbox'
       disabled={disabled}
       checked={isChecked}
+      data-test={dataTest}
       id={`${id}-switcher`}
       {...props}
     />

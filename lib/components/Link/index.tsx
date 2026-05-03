@@ -4,6 +4,7 @@ import {StyledLink} from './Link.styled.tsx';
 type PartialLinkProps = Partial<{
   underline: 'hover' | 'always';
   size: 'sm' | 'md' | 'xs' | 'lg';
+  selected: boolean;
 }>;
 
 type LinkProps = {

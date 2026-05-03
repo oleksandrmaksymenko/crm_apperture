@@ -1,4 +1,4 @@
-import {blueGrey, deepOrange, grey} from '../colors.ts';
+import {blueGrey, deepOrange, grey, green} from '../colors.ts';
 
 const selector = {
   selectorBorderColor: {
@@ -196,6 +196,10 @@ const link = {
   linkUnderlineColor: {
     light: deepOrange[100],
     dark: deepOrange[500],
+  },
+  linkColorSelected: {
+    light: green[300],
+    dark: green[500],
   },
 };
 
