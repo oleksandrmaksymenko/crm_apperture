@@ -11,7 +11,7 @@ export type RadioProps = Partial<{
   label: string;
   disabled: boolean;
   isChecked: boolean;
-  onChange: (arg: boolean) => void;
+  onChange: (arg: React.ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 const Radio = ({
