@@ -14,7 +14,6 @@ export default {
 const Template: StoryFn<any> = args => {
   const handleClick = (e: {preventDefault: () => void}) => {
     e.preventDefault();
-    console.log('click action');
   };
   return (
     <MenuList {...args}>

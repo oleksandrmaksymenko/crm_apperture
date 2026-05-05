@@ -5,7 +5,6 @@ import type {PositionProps} from '.';
 type PositionStyleProps = PositionProps & ThemeProps;
 
 const positionFormatter = (position: PositionProps['placement']) => {
-  console.log(position);
   if (position === 'top') return {top: 0};
   if (position === 'top-end') return {top: 0, right: 0};
   if (position === 'top-start') return {top: 0, left: 0};

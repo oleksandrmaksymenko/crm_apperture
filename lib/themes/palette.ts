@@ -36,7 +36,7 @@ export const palette: any = {
   },
   text: {
     primary: {
-      light: '#111827',
+      light: '#fff',
       dark: '#111827',
     },
     secondary: {
@@ -52,8 +52,8 @@ export const palette: any = {
       dark: '#111827',
     },
     error: {
-      light: '#fff',
-      dark: '#111827',
+      light: '#dd1a1a',
+      dark: '#d83f13',
     },
     warning: {
       light: '#fff',
@@ -169,4 +169,6 @@ export const palette: any = {
     dark: '#000',
   },
   ...elementPalette,
-};
+} as const;
+
+export type Palette = typeof palette;

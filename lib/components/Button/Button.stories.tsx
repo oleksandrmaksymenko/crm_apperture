@@ -1,5 +1,5 @@
 import {Meta, StoryFn} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
+import {fn} from '@storybook/test';
 import Button, {ButtonProps} from './';
 import {MoreVerticalIcon} from '../../assets/icons';
 
@@ -18,11 +18,37 @@ Primary.args = {
   icon: <MoreVerticalIcon />,
   iconPosition: 'left',
   isFullSize: true,
-  onClick: action('on-click'),
+  onClick: fn(),
 };
 
 Primary.argTypes = {
+  variant: {
+    defaultValue: 'primary',
+    control: {type: 'select'},
+    options: [
+      'primary',
+      'secondary',
+      'tertiary',
+      'error',
+      'warning',
+      'success',
+      'info',
+      'outline',
+      'disabled',
+      'text',
+    ],
+  },
+  size: {
+    defaultValue: 'medium',
+    control: {type: 'select'},
+    options: ['small', 'medium', 'large', 'xlarge'],
+  },
+  iconPosition: {
+    control: {type: 'select'},
+    defaultValue: 'left',
+    options: ['left', 'right'],
+  },
   icon: {
-    control: {type: 'string'},
+    control: false,
   },
 };
