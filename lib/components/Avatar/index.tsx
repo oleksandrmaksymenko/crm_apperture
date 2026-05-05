@@ -67,7 +67,7 @@ const getFontColor = (bgColor: string) => {
 const stringAvatar = (name: string) => ({
   backgroundColor: stringToColor(name),
   color: getFontColor(hexToRgb(stringToColor(name))),
-  coloredName: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+  coloredName: `${name.split(' ')[0][0]}${name.split(' ')[1]?.[0] ?? ''}`,
 });
 
 const Avatar = (props: AvatarProps) => {

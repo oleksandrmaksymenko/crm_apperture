@@ -1,4 +1,9 @@
-export {lightTheme, darkTheme, StyledThemeProvider} from './themes';
+export {
+  lightTheme,
+  darkTheme,
+  StyledThemeProvider,
+  type ThemeProps,
+} from './themes';
 
 export {default as Button} from './components/Button';
 export {default as Popup} from './components/Popup';

@@ -11,12 +11,12 @@ import Button from '../Button';
 import {SizingType, SpacingType, ThemeColorType} from '../../global.types.ts';
 
 export type PopupProps = {
-  children: React.ReactNode;
+  children: string | React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  footer: React.ReactNode;
+  footer: string | React.ReactNode;
 } & Partial<{
-  title: string;
+  title: string | React.ReactNode;
   size: SizingType;
   gutter: SpacingType;
   iconFill: ThemeColorType;

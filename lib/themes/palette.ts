@@ -152,10 +152,6 @@ export const palette: any = {
     light: '#007bff',
     dark: '#333',
   },
-  popupBackground: {
-    light: 'rgba(0,0,0,0.5)',
-    dark: 'rgba(0,0,0,0.5)',
-  },
   notification: {
     light: deepOrange[800],
     dark: deepOrange[800],

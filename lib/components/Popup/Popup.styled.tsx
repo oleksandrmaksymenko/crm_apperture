@@ -14,6 +14,7 @@ export const StyledPopup = styled.div<PopupStyledProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 `;
 
 export const StyledPopupOverlay = styled.div<PopupStyledProps>`

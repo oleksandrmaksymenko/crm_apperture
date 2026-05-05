@@ -32,7 +32,7 @@ Primary.argTypes = {
     options: Object.keys(sizing),
   },
   footer: {
-    control: {type: ''},
+    control: {type: 'text'},
   },
 };
 
