@@ -49,7 +49,6 @@ const Dropdown = ({
     const value = e.target.attributes['data-selected']?.textContent;
     const id = e.target.id;
     if (value || id) {
-      console.log(value, id);
       onSelect({value, id});
       if (isChooseSelect) setLabelText(value);
       setIsDropdownShow(false);

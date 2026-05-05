@@ -4,39 +4,12 @@ import {ThemeProps} from '../../themes';
 
 type ButtonStyledProps = ButtonProps & ThemeProps;
 
-const primary = ({colors, text}: ThemeProps) => ` 
-  background-color: ${colors.primary};
-  color: ${text.primary};
-`;
-
-const secondary = ({colors, text}: ThemeProps) => `
-  background-color: ${colors.secondary};
-  color: ${text.secondary};
-`;
-
-const tertiary = ({colors, text}: ThemeProps) => `
-  background-color: ${colors.tertiary};
-  color: ${text.tertiary};
-`;
-
-const error = ({colors, text}: ThemeProps) => `
-  background-color: ${colors.error};
-  color: ${text.error};
-`;
-
-const warning = ({colors, text}: ThemeProps) => `
-  background-color: ${colors.warning};
-  color: ${text.warning};
-`;
-
-const success = ({colors, text}: ThemeProps) => `
-  background-color: ${colors.success};
-  color: ${text.success};
-`;
-
-const info = ({colors, text}: ThemeProps) => `
-  background-color: ${colors.info};
-  color: ${text.info};
+const variantCollector = (
+  {colors, text}: ThemeProps,
+  variant: ButtonProps['variant'],
+) => `
+  background-color: ${colors[variant]};
+  color: ${text[variant]};
 `;
 
 const outline = ({colors, text}: ThemeProps) => `
@@ -102,18 +75,6 @@ export const StyledButton = styled.button<ButtonStyledProps>`
 
   ${({variant, theme}) => {
     switch (variant) {
-      case 'secondary':
-        return secondary(theme);
-      case 'tertiary':
-        return tertiary(theme);
-      case 'error':
-        return error(theme);
-      case 'warning':
-        return warning(theme);
-      case 'success':
-        return success(theme);
-      case 'info':
-        return info(theme);
       case 'outline':
         return outline(theme);
       case 'text':
@@ -121,7 +82,7 @@ export const StyledButton = styled.button<ButtonStyledProps>`
       case 'disabled':
         return disabled(theme);
       default:
-        return primary(theme);
+        return variantCollector(theme, variant);
     }
   }}
 

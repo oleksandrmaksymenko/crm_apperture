@@ -12,7 +12,7 @@ const Template: StoryFn<SwitcherProps> = args => <Switcher {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   onChange: action('on-change'),
-  disabled: true,
+  disabled: false,
   label: 'Company name',
   id: 'test',
 };
