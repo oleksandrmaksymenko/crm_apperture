@@ -1,54 +1,67 @@
-import {Meta, StoryFn} from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 import {fn} from '@storybook/test';
-import Button, {ButtonProps} from './';
+import Button from './';
 import {MoreVerticalIcon} from '../../assets/icons';
 
-export default {
+const meta = {
   title: 'Components/Button',
   component: Button,
-} as Meta;
+  tags: ['autodocs'],
+  args: {
+    onClick: fn(),
+  },
+  argTypes: {
+    variant: {
+      control: {type: 'select'},
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'error',
+        'warning',
+        'success',
+        'info',
+        'outline',
+        'disabled',
+        'text',
+      ],
+    },
+    size: {
+      control: {type: 'select'},
+      options: ['small', 'medium', 'large', 'xlarge'],
+    },
+    iconPosition: {
+      control: {type: 'select'},
+      options: ['left', 'right'],
+    },
+    icon: {
+      control: false,
+      description: 'Icon element rendered next to the label, e.g. `<SearchIcon />`.',
+    },
+  },
+} satisfies Meta<typeof Button>;
 
-const Template: StoryFn<ButtonProps> = args => <Button {...args} />;
+export default meta;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  children: 'Click me',
-  variant: 'primary',
-  size: 'medium',
-  icon: <MoreVerticalIcon />,
-  iconPosition: 'left',
-  isFullSize: true,
-  onClick: fn(),
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    children: 'Click me',
+    variant: 'primary',
+    size: 'medium',
+    icon: <MoreVerticalIcon />,
+    iconPosition: 'left',
+    isFullSize: false,
+  },
 };
 
-Primary.argTypes = {
-  variant: {
-    defaultValue: 'primary',
-    control: {type: 'select'},
-    options: [
-      'primary',
-      'secondary',
-      'tertiary',
-      'error',
-      'warning',
-      'success',
-      'info',
-      'outline',
-      'disabled',
-      'text',
-    ],
-  },
-  size: {
-    defaultValue: 'medium',
-    control: {type: 'select'},
-    options: ['small', 'medium', 'large', 'xlarge'],
-  },
-  iconPosition: {
-    control: {type: 'select'},
-    defaultValue: 'left',
-    options: ['left', 'right'],
-  },
-  icon: {
-    control: false,
+export const IconFree: Story = {
+  args: {
+    children: 'Click me',
+    variant: 'primary',
+    size: 'medium',
+    iconPosition: 'left',
+    isFullSize: false,
   },
 };

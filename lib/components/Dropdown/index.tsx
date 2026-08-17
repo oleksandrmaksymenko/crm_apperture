@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   StyledDropdownContainer,
   StyledDropdownLabelText,
@@ -9,7 +9,7 @@ import {
 } from './Dropdown.styled.tsx';
 import {StatMinusIcon} from '../../assets/icons';
 import {useTheme} from '@emotion/react';
-import {ThemeProps} from '../../themes';
+import useClickOutside from '../../hooks/useClickOutside.ts';
 
 export type DropdownProps = {
   label: string;
@@ -22,67 +22,101 @@ export type DropdownProps = {
 } & Partial<{
   size: 'full' | 'content';
   listSize: 'sm' | 'md' | 'lg';
-  withoutIcon: boolean;
+  withIcon: boolean;
   disabled: boolean;
   isChooseSelect: boolean;
 }>;
 
 const Dropdown = ({
   label,
-  withoutIcon,
+  withIcon,
   list,
   onSelect,
   isChooseSelect,
   listSize = 'md',
   size,
+  disabled,
   ...rest
 }: DropdownProps) => {
-  const [labelText, setLabelText] = useState<string>(label);
+  const [labelText, setLabelText] = useState(label);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isDropdownShow, setIsDropdownShow] = useState(false);
-  const {colors} = useTheme() as ThemeProps;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const {colors} = useTheme();
+
+  useEffect(() => {
+    setLabelText(label);
+  }, [label]);
+
+  useClickOutside(containerRef, () => {
+    if (isDropdownShow) setIsDropdownShow(false);
+  });
 
   const toggleDropdown = () => {
-    setIsDropdownShow(!isDropdownShow);
+    if (disabled) return;
+    setIsDropdownShow(show => !show);
   };
 
-  const handleSelect = (e: React.BaseSyntheticEvent<HTMLDivElement>) => {
-    const value = e.target.attributes['data-selected']?.textContent;
-    const id = e.target.id;
-    if (value || id) {
-      onSelect({value, id});
-      if (isChooseSelect) setLabelText(value);
-      setIsDropdownShow(false);
+  const handleTriggerKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleDropdown();
     }
+    if (e.key === 'Escape') setIsDropdownShow(false);
+  };
+
+  const handleSelect = (item: DropdownProps['list'][number]) => {
+    onSelect({value: item.title, id: item.id});
+    setSelectedId(item.id);
+    if (isChooseSelect) setLabelText(item.title);
+    setIsDropdownShow(false);
+  };
+
+  const handleItemKeyDown = (
+    e: React.KeyboardEvent,
+    item: DropdownProps['list'][number],
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleSelect(item);
+    }
+    if (e.key === 'Escape') setIsDropdownShow(false);
   };
 
   return (
-    <StyledDropdownContainer {...{size}} {...rest}>
-      <StyledDropdownLabelText onClick={toggleDropdown} {...{listSize}}>
+    <StyledDropdownContainer ref={containerRef} {...{size, disabled}} {...rest}>
+      <StyledDropdownLabelText
+        role='button'
+        tabIndex={disabled ? -1 : 0}
+        aria-haspopup='listbox'
+        aria-expanded={isDropdownShow}
+        onClick={toggleDropdown}
+        onKeyDown={handleTriggerKeyDown}
+        {...{listSize, size}}
+      >
         {labelText}
-        {!withoutIcon && (
+        {withIcon && (
           <StyledIconContainer isDropdownShow={isDropdownShow}>
             <StatMinusIcon fill={colors.dropdownIconFill} />
           </StyledIconContainer>
         )}
       </StyledDropdownLabelText>
-      <StyledDropdownToggle
-        isDropdownShow={isDropdownShow}
-        onClick={handleSelect}
-        {...{size}}
-        {...{listSize}}
-      >
-        <StyledDropdownListContainer>
-          {list &&
-            list.map(item => (
-              <StyledDropdownListItem
-                key={item.id}
-                id={item.id}
-                data-selected={item.title}
-              >
-                {item.icon && item.icon}
-                {item.title}
-              </StyledDropdownListItem>
-            ))}
+      <StyledDropdownToggle isDropdownShow={isDropdownShow} {...{size, listSize}}>
+        <StyledDropdownListContainer role='listbox'>
+          {list.map(item => (
+            <StyledDropdownListItem
+              key={item.id}
+              role='option'
+              tabIndex={isDropdownShow ? 0 : -1}
+              aria-selected={item.id === selectedId}
+              isSelected={item.id === selectedId}
+              onClick={() => handleSelect(item)}
+              onKeyDown={e => handleItemKeyDown(e, item)}
+            >
+              {item.icon}
+              {item.title}
+            </StyledDropdownListItem>
+          ))}
         </StyledDropdownListContainer>
       </StyledDropdownToggle>
     </StyledDropdownContainer>

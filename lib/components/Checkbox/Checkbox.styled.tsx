@@ -1,13 +1,11 @@
 import styled from '@emotion/styled';
 import type {CheckboxProps} from './index.tsx';
-import type {ThemeProps} from '../../themes';
 
-type StyledCheckboxProps = CheckboxProps & ThemeProps;
+type StyledCheckboxProps = CheckboxProps;
 
-export const StyledCheckboxContainer = styled.div<StyledCheckboxProps>`
+export const StyledCheckboxContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({theme, gap}) => theme.gaps[gap]};
 `;
 
 export const StyledLabel = styled.label<StyledCheckboxProps>`
@@ -16,19 +14,20 @@ export const StyledLabel = styled.label<StyledCheckboxProps>`
   display: flex;
   align-items: center;
   user-select: none;
+  opacity: ${({disabled}) => (disabled ? 0.5 : 1)};
   pointer-events: ${({disabled}) => (disabled ? 'none' : 'default')};
 
   &:before {
     content: '';
-    width: 14px;
-    height: 14px;
-    border: 1px solid
-      ${({theme, disabled}) =>
-        disabled
-          ? theme.colors.selectorDisabledBorderColor
-          : theme.colors.selectorBorderColor};
-    border-radius: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
+    background: ${({theme}) => theme.colors.surface};
+    border: 1px solid ${({theme}) => theme.colors.border};
     position: absolute;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
   }
 
   & > svg {
@@ -52,6 +51,7 @@ export const StyledCheckbox = styled.input<StyledCheckboxProps>`
           disabled
             ? theme.colors.selectorDisabledBackgroundColor
             : theme.colors.selectorBackgroundColor};
+        border-color: transparent;
       }
 
       svg {

@@ -1,20 +1,25 @@
-import {Meta, StoryFn} from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
-import Switcher, {SwitcherProps} from './';
+import Switcher from './';
 
-export default {
+const meta = {
   title: 'Components/Switcher',
   component: Switcher,
-} as Meta;
+  tags: ['autodocs'],
+  args: {
+    onChange: action('on-change'),
+  },
+} satisfies Meta<typeof Switcher>;
 
-const Template: StoryFn<SwitcherProps> = args => <Switcher {...args} />;
+export default meta;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  onChange: action('on-change'),
-  disabled: false,
-  label: 'Company name',
-  id: 'test',
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    id: 'test',
+    label: 'Company name',
+    disabled: false,
+    isChecked: true,
+  },
 };
-
-Primary.argTypes = {};

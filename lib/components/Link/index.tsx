@@ -7,7 +7,7 @@ type PartialLinkProps = Partial<{
   selected: boolean;
 }>;
 
-type LinkProps = {
+export type LinkProps = {
   href: string;
   children: ReactNode;
 } & PartialLinkProps &

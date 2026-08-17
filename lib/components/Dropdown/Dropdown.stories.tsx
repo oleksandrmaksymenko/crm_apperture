@@ -1,40 +1,48 @@
-import {Meta, StoryFn} from '@storybook/react';
-import Dropdown, {DropdownProps} from './';
-import {StatMinusIcon} from '../../assets/icons';
+import type {Meta, StoryObj} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
+import Dropdown from './';
+import {StatMinusIcon} from '../../assets/icons';
 
-export default {
+const meta = {
   title: 'Components/Dropdown',
   component: Dropdown,
-} as Meta;
+  tags: ['autodocs'],
+  args: {
+    onSelect: action('on-select'),
+  },
+  argTypes: {
+    listSize: {
+      control: {type: 'select'},
+      options: ['sm', 'md', 'lg'],
+    },
+    size: {
+      control: {type: 'select'},
+      options: ['content', 'full'],
+    },
+    list: {
+      control: false,
+      description:
+        'Array of options to render: `{ title: string; id: string; icon?: ReactNode }[]`. Not editable via Controls since `icon` can hold a React node — set it directly in the story args.',
+    },
+  },
+} satisfies Meta<typeof Dropdown>;
 
-const Template: StoryFn<DropdownProps> = args => <Dropdown {...args} />;
+export default meta;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  label: 'Select',
-  size: 'full',
-  withoutIcon: true,
-  list: [
-    {
-      title: 'Option 1',
-      id: 'option-1',
-      icon: <StatMinusIcon />,
-    },
-    {
-      title: 'Option 2',
-      id: 'option-2',
-      icon: <StatMinusIcon />,
-    },
-    {
-      title: 'Option 3',
-      id: 'option-3',
-    },
-  ],
-  onSelect: action('on-select'),
-  isChooseSelect: true,
-  listSize: 'sm',
-  disabled: false,
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    label: 'Select',
+    size: 'content',
+    withIcon: true,
+    list: [
+      {title: 'Option 1', id: 'option-1', icon: <StatMinusIcon />},
+      {title: 'Option 2', id: 'option-2', icon: <StatMinusIcon />},
+      {title: 'Option 3', id: 'option-3'},
+    ],
+    isChooseSelect: true,
+    listSize: 'sm',
+    disabled: false,
+  },
 };
-
-Primary.argTypes = {};

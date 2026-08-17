@@ -1,15 +1,15 @@
-import {useRef, useState} from 'react';
+import {useEffect, useId, useState} from 'react';
 
 import {
   StyledTextField,
   StyledTextFieldContainer,
-  StyledPrefix,
-  StyledSuffix,
+  StyledTextFieldControl,
+  StyledInputRow,
+  StyledAffix,
   StyledDescription,
   StyledError,
   StyledLabel,
   StyledIconContainer,
-  StyledTextFieldControl,
 } from './TextField.styled.tsx';
 
 export type TextFieldProps = {
@@ -18,7 +18,7 @@ export type TextFieldProps = {
   variant: 'primary' | 'outlined';
   placeholder: string;
   icon: React.ReactNode;
-  iconPosition?: 'left' | 'right';
+  iconPosition: 'left' | 'right';
   prefix: string;
   suffix: string;
   label: string;
@@ -28,9 +28,12 @@ export type TextFieldProps = {
   value: string;
   onChange: (arg: string) => void;
 }> &
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
+  Omit<
+    React.DetailedHTMLProps<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >,
+    'onChange'
   >;
 
 const TextField = ({
@@ -46,77 +49,74 @@ const TextField = ({
   onChange,
   ...rest
 }: TextFieldProps) => {
-  const [currentValue, setCurrentValue] = useState<string>(value || '');
+  const [currentValue, setCurrentValue] = useState(value || '');
   const [isFocus, setIsFocus] = useState(false);
-  const prefixSuffixRef = useRef<HTMLDivElement>(null);
+  const hintId = useId();
+
+  useEffect(() => {
+    if (value !== undefined) setCurrentValue(value);
+  }, [value]);
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    rest.onFocus && rest.onFocus(e);
+    rest.onFocus?.(e);
     setIsFocus(true);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    rest.onBlur && rest.onBlur(e);
+    rest.onBlur?.(e);
     if (currentValue.length === 0) setIsFocus(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let inputValue = e.target.value;
-    inputValue = inputValue.replace(/[^\dA-Za-z]/g, '');
-    onChange && onChange(inputValue);
-
+    const inputValue = e.target.value;
+    onChange?.(inputValue);
     setCurrentValue(inputValue);
   };
 
-  const isIconLeftPosition: boolean = !!icon && iconPosition === 'left';
-  const placeholderWiver = () => {
-    if (isFocus && rest.placeholder) return rest.placeholder;
-    if (!label && rest.placeholder) return rest.placeholder;
-    if (label && !isFocus) return '';
-    return rest.placeholder;
-  };
+  const isLeftIcon = !!icon && iconPosition === 'left';
+  const isRightIcon = !!icon && iconPosition !== 'left';
+  const hasHint = !!(description || error);
+
+  const resolvePlaceholder = () => (label && !isFocus ? '' : rest.placeholder);
 
   return (
     <StyledTextFieldContainer isFullWidth={rest.isFullWidth}>
-      <StyledTextFieldControl>
+      <StyledTextFieldControl isError={!!error} disabled={rest.disabled}>
         <StyledLabel
           htmlFor={id}
           isFocus={isFocus || currentValue !== ''}
-          isLeftIconPosition={isIconLeftPosition}
+          isLeftIconPosition={isLeftIcon}
           isPrefix={!!prefix}
         >
           {label}
         </StyledLabel>
-        {isIconLeftPosition && (
-          <StyledIconContainer isLeft>{icon}</StyledIconContainer>
-        )}
-        {prefix && !suffix && (
-          <StyledPrefix useRef={prefixSuffixRef}>{prefix}</StyledPrefix>
-        )}
-        <StyledTextField
-          {...rest}
-          {...{id}}
-          value={currentValue}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          isError={!!error}
-          placeholder={placeholderWiver()}
-          type='text'
-          isLeftIconPosition={isIconLeftPosition}
-          isPrefix={!!prefix}
-        />
-        {suffix && !prefix && (
-          <StyledSuffix useRef={prefixSuffixRef}>{suffix}</StyledSuffix>
-        )}
-        {!suffix && icon && iconPosition === 'right' && (
-          <StyledIconContainer>{icon}</StyledIconContainer>
-        )}
-        {description && !error && (
-          <StyledDescription>{description}</StyledDescription>
-        )}
-        {error && <StyledError>{error}</StyledError>}
+        <StyledInputRow>
+          {isLeftIcon && <StyledIconContainer>{icon}</StyledIconContainer>}
+          {prefix && <StyledAffix>{prefix}</StyledAffix>}
+          <StyledTextField
+            {...rest}
+            id={id}
+            value={currentValue}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            placeholder={resolvePlaceholder()}
+            type={rest.type || 'text'}
+            aria-invalid={!!error || undefined}
+            aria-describedby={hasHint ? hintId : undefined}
+          />
+          {suffix && <StyledAffix>{suffix}</StyledAffix>}
+          {isRightIcon && <StyledIconContainer>{icon}</StyledIconContainer>}
+        </StyledInputRow>
       </StyledTextFieldControl>
+      {description && !error && (
+        <StyledDescription id={hintId}>{description}</StyledDescription>
+      )}
+      {error && (
+        <StyledError id={hintId} role='alert'>
+          {error}
+        </StyledError>
+      )}
     </StyledTextFieldContainer>
   );
 };

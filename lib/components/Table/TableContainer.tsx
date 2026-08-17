@@ -5,14 +5,13 @@ import {
   StyledTableHead,
 } from './Table.styled.tsx';
 import Checkbox from '../Checkbox';
-import {uuid} from '../../functions/uuid.ts';
 import TableRow from './TableRow.tsx';
 
 export type BodyItemProps = {
   title: string;
   name: string;
   companyName: string;
-  Menu?: any;
+  Menu?: (props: {close: () => void}) => React.JSX.Element;
 };
 
 export type TableContainerType = {
@@ -35,29 +34,37 @@ export type TableContainerTypeProps = Record<
 >;
 
 const TableContainer = ({tableConfig}: TableContainerTypeProps) => {
-  const [isSelectedAll, setIsSelectedAll] = useState(false);
+  const [selectedAllByTable, setSelectedAllByTable] = useState<
+    Record<number, boolean>
+  >({});
 
-  const selectAll = () => {
-    setIsSelectedAll(!isSelectedAll);
-  };
-
-  const handleSort = (sortBy: string) => {
-    console.log(sortBy);
+  const handleSort = (_sortBy: string) => {
+    // TODO: wire up sorting once the API supports it
   };
 
   return (
     <div>
-      {tableConfig.map(item => (
-        <StyledTable key={uuid()}>
+      {tableConfig.map((item, tableIndex) => (
+        <StyledTable key={tableIndex}>
           <StyledTableHead
             length={item.head.length}
             withCheckbox={item.withCheckbox}
             withActions={item.withActions}
           >
-            {item.withCheckbox && <Checkbox id='head' onChange={selectAll} />}
+            {item.withCheckbox && (
+              <Checkbox
+                id={`head-${tableIndex}`}
+                onChange={() =>
+                  setSelectedAllByTable(state => ({
+                    ...state,
+                    [tableIndex]: !state[tableIndex],
+                  }))
+                }
+              />
+            )}
             {item.head.map(headItem => (
               <StyledTableCell
-                key={uuid()}
+                key={headItem.title}
                 onClick={() => headItem.sortBy && handleSort(headItem.sortBy)}
               >
                 {headItem.title}
@@ -66,11 +73,12 @@ const TableContainer = ({tableConfig}: TableContainerTypeProps) => {
           </StyledTableHead>
           {item.body.map((bodyItem, i) => (
             <TableRow
-              key={uuid()}
+              key={i}
               bodyItem={bodyItem}
               item={item}
               i={i}
-              isSelectedAll={isSelectedAll}
+              tableIndex={tableIndex}
+              isSelectedAll={!!selectedAllByTable[tableIndex]}
               length={item.head.length}
               withCheckbox={item.withCheckbox}
               withActions={item.withActions}

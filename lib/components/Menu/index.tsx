@@ -1,7 +1,7 @@
 import MenuItem from './MenuItem';
 import MenuList from './MenuList';
 
-export default () => ({
+export default {
   Item: MenuItem,
   List: MenuList,
-});
+};

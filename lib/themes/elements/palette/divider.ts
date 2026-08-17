@@ -1,8 +1,6 @@
-import {blueGrey} from '../../colors.ts';
-
 export const divider = {
   dividerBackgroundColor: {
-    light: blueGrey[100],
-    dark: blueGrey[100],
+    light: '#e4e4e7',
+    dark: '#27272a',
   },
 };

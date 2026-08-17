@@ -9,7 +9,6 @@ export {default as TextField} from './components/TextField';
 export {default as Switcher} from './components/Switcher';
 export {default as Checkbox} from './components/Checkbox';
 export {default as Radio} from './components/Radio';
-export {default as InputGroup} from './components/InputGroup';
 export {default as SelectorGroup} from './components/SelectorGroup';
 export {default as Divider} from './components/Divider';
 export {default as Dropdown} from './components/Dropdown';

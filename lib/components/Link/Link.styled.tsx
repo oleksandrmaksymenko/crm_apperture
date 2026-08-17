@@ -1,11 +1,8 @@
 import styled from '@emotion/styled';
-import {ThemeProps} from '../../themes';
+import type {LinkProps} from './index.tsx';
+import type {Light} from '../../themes';
 
-type LinkStyledProps = ThemeProps;
-
-type ColorsType = {
-  linkUnderlineColor: string;
-};
+type ColorsType = Light['colors'];
 
 const hoverUnderline = `
   &:hover {
@@ -32,19 +29,22 @@ const alwaysUnderline = (colors: ColorsType) => `
   }
 `;
 
-const viewTextDecoration = (underline: string, colors: ColorsType) => {
+const viewTextDecoration = (
+  underline: string | undefined,
+  colors: ColorsType,
+) => {
   if (underline === 'hover') return hoverUnderline;
   if (underline === 'always') return alwaysUnderline(colors);
   return ``;
 };
 
-export const StyledLink = styled.a<LinkStyledProps>`
+export const StyledLink = styled.a<Partial<LinkProps>>`
   color: ${({theme}) => theme.colors.linkColor};
   text-decoration: none;
   transition: ${({theme}) => theme.transition};
 
   ${({underline, theme: {colors}}) => viewTextDecoration(underline, colors)}
-  ${({theme, size}) => theme.typography.fontMixin[size]}
+  ${({theme, size}) => size && theme.typography.fontMixin[size]}
   
   &:hover {
     color: ${({theme}) => theme.colors.linkColorHover};

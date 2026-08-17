@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import {ThemeProps} from '../../themes';
+import type {PaperProps} from './index.tsx';
 import {shadows} from '../../themes/shadows.ts';
+import {surfaceCard} from '../../themes';
 
 const elevationMap: {[key: number]: keyof typeof shadows} = {
   0: 'none',
@@ -12,13 +13,15 @@ const elevationMap: {[key: number]: keyof typeof shadows} = {
   6: 'inner',
 };
 
-export const StyledPaper = styled.div<ThemeProps>`
-  box-shadow: ${({theme, elevation}) => theme.shadows[elevationMap[elevation]]};
-  padding: ${({theme, rounded, padding}) => theme.gaps[rounded || padding]};
-  background-color: ${({theme, bg}) =>
-    theme.colors[bg] || theme.colors.paperBackgroundColor};
-  color: ${({theme}) => theme.colors.paperTextColor};
+export const StyledPaper = styled.div<Partial<PaperProps>>`
+  ${({theme, rounded}) => surfaceCard(theme, theme.gaps[rounded || 'lg'])};
+  ${({theme, bg}) => bg && `background: ${theme.colors[bg]};`}
+  ${({theme, elevation}) =>
+    elevation && `box-shadow: ${theme.shadows[elevationMap[elevation]]};`}
+  padding: ${({theme, rounded, padding}) =>
+    theme.gaps[rounded || padding || 'sm']};
+  color: ${({theme}) => theme.text.primary};
   width: auto;
   max-width: 100%;
-  ${({theme, rounded}) => rounded && `border-radius: ${theme.gaps[rounded]};`};
+  transition: box-shadow 0.2s ease;
 `;

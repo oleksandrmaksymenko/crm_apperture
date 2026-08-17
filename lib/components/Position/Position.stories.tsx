@@ -1,50 +1,42 @@
-import {Meta, StoryFn} from '@storybook/react';
-import Position, {PositionProps} from '.';
+import type {Meta, StoryObj} from '@storybook/react';
+import Position from '.';
 
-export default {
+const meta = {
   title: 'Components/Position',
   component: Position,
-} as Meta;
+  tags: ['autodocs'],
+  decorators: [
+    Story => (
+      <div style={{width: '100%', height: 'calc(100vh - 2rem)'}}>
+        <Story />
+      </div>
+    ),
+  ],
+  argTypes: {
+    placement: {
+      control: {type: 'select'},
+      options: [
+        'top-end',
+        'top-start',
+        'top-center',
+        'right-end',
+        'right-center',
+        'left-end',
+        'left-center',
+        'bottom-center',
+        'middle',
+      ],
+    },
+  },
+} satisfies Meta<typeof Position>;
 
-const Template: StoryFn<PositionProps> = args => (
-  <div
-    style={{
-      width: '100%',
-      height: 'calc(100vh - 2rem)',
-    }}
-  >
-    <Position {...args} />
-  </div>
-);
+export default meta;
 
-export const Primary = Template.bind({});
+type Story = StoryObj<typeof meta>;
 
-Primary.args = {
-  placement: 'middle',
-  children: 'top-position',
-};
-
-Primary.argTypes = {
-  placement: {
-    control: {type: 'select'},
-    options: [
-      'top',
-      'top-end',
-      'top-start',
-      'top-center',
-      'right',
-      'right-end',
-      'right-start',
-      'right-center',
-      'left',
-      'left-end',
-      'left-start',
-      'left-center',
-      'bottom',
-      'bottom-end',
-      'bottom-start',
-      'bottom-center',
-      'middle',
-    ],
+export const Primary: Story = {
+  args: {
+    placement: 'middle',
+    children: 'top-position',
   },
 };

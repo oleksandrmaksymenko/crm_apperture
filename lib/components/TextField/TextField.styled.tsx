@@ -1,113 +1,144 @@
 import styled from '@emotion/styled';
 import {TextFieldProps} from './index.tsx';
-import {ThemeProps} from '../../themes';
+import {surfaceInset} from '../../themes';
 
-type StyledTextFieldProps = TextFieldProps & ThemeProps;
+type StyledTextFieldProps = Partial<Omit<TextFieldProps, 'onChange'>>;
 
 export const StyledTextFieldContainer = styled.div<StyledTextFieldProps>`
   position: relative;
-  gap: ${({theme}) => theme.gaps.md};
-  ${({isFullWidth}) =>
-    isFullWidth
-      ? `
-          width: 100%;
-          display: block;
-        `
-      : 'display: flex;'};
+  display: ${({isFullWidth}) => (isFullWidth ? 'block' : 'inline-block')};
+  width: ${({isFullWidth}) => (isFullWidth ? '100%' : 'auto')};
 `;
 
-export const StyledTextFieldControl = styled.div<StyledTextFieldProps>`
+export const StyledTextFieldControl = styled.div<
+  StyledTextFieldProps & {isError?: boolean}
+>`
   position: relative;
+  ${({theme}) => surfaceInset(theme, '10px')};
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: ${({theme}) => theme.colors.primary};
+  }
+
+  &:focus-within {
+    border-color: ${({theme}) => theme.colors.primary};
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, ${({theme}) => theme.colors.primary} 20%, transparent);
+  }
+
+  ${({theme, isError}) =>
+    isError &&
+    `
+      border-color: ${theme.colors.error};
+      box-shadow: 0 0 0 3px color-mix(in srgb, ${theme.colors.error} 20%, transparent);
+    `}
+
+  ${({theme, disabled}) =>
+    disabled &&
+    `
+      opacity: 0.55;
+      cursor: not-allowed;
+      pointer-events: none;
+      border-color: ${theme.colors.border};
+    `}
+`;
+
+export const StyledInputRow = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: ${({theme}) => theme.gaps.xs};
+  padding: ${({theme}) => `${theme.gaps.sm} ${theme.gaps['sm-2']}`};
 `;
 
 export const StyledLabel = styled.label<
-  StyledTextFieldProps & {isLeftIconPosition: boolean; isPrefix: boolean}
+  StyledTextFieldProps & {
+    isFocus: boolean;
+    isLeftIconPosition: boolean;
+    isPrefix: boolean;
+  }
 >`
   position: absolute;
-  top: 5px;
-  left: ${({theme, isFocus}) => (isFocus ? theme.gaps.xs : theme.gaps['sm-2'])};
+  top: 8px;
+  left: ${({theme, isFocus, isLeftIconPosition, isPrefix}) =>
+    !isFocus && (isLeftIconPosition || isPrefix)
+      ? theme.gaps.xxl
+      : isFocus
+        ? theme.gaps.sm
+        : theme.gaps['sm-2']};
   transition: all ${({theme}) => theme.transition};
   color: ${({theme}) => theme.text.primary};
   cursor: text;
+  pointer-events: none;
 
   ${({isFocus, theme}) =>
     isFocus &&
     `
-    padding: ${theme.gaps.xs} ${theme.gaps.sm};
+    padding: 0 ${theme.gaps.xs};
     font-size: ${theme.typography.fontSizes.xs};
     font-weight: ${theme.typography.fontWeights.light};
     line-height: ${theme.typography.lineHeights.xs};
-    top: -12px;
+    top: -5px;
+    left: ${theme.gaps.sm};
+    background: ${theme.colors.background};
+    border-radius: ${theme.gaps.xs};
   `}
-
-  ${({isLeftIconPosition}) => isLeftIconPosition && 'padding-left: 12px'}
-  ${({isPrefix}) => isPrefix && 'padding-left: 5px'}
 `;
 
-export const StyledTextField = styled.input<
-  StyledTextFieldProps & {isError: boolean}
->`
-  width: ${({isFullWidth}) => (isFullWidth ? '100%' : 'auto')};
-  padding: ${({theme}) => `${theme.gaps.sm} ${theme.gaps['sm-2']}`};
+export const StyledTextField = styled.input<StyledTextFieldProps>`
+  flex: 1;
+  min-width: 0;
+  width: 100%;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid
-    ${({theme, isError}) =>
-      isError ? theme.colors.error : theme.colors.border};
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
   color: ${({theme}) => theme.text.secondary};
 
   &:focus {
     outline: none;
   }
 
-  ${({isLeftIconPosition}) => isLeftIconPosition && 'padding-left: 20px'}
-  ${({isPrefix}) => isPrefix && 'padding-left: 25px'}
+  &::placeholder {
+    color: ${({theme}) => theme.text.disabled};
+  }
 `;
 
-export const StyledIconContainer = styled.div<
-  StyledTextFieldProps & {isLeft: boolean}
->`
-  position: absolute;
-  top: 5px;
+export const StyledIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: ${({theme}) => theme.text.secondary};
 
-  ${({isLeft}) => (isLeft ? `left: 0` : `right: 0`)}
+  svg {
+    display: block;
+  }
 `;
 
-const PrefixSuffix = styled.span`
-  max-width: 25px;
-  text-overflow: ellipsis;
-  overflow: hidden;
+export const StyledAffix = styled.span`
+  flex-shrink: 0;
   white-space: nowrap;
-  position: absolute;
-  top: 4px;
+  color: ${({theme}) => theme.text.secondary};
 `;
 
-export const StyledPrefix = styled(PrefixSuffix)<StyledTextFieldProps>`
-  left: 0;
+export const StyledDescription = styled.span`
+  display: block;
+  margin-top: ${({theme}) => theme.gaps.xs};
+  font-size: ${({theme}) => theme.typography.fontSizes.sm};
+  font-weight: ${({theme}) => theme.typography.fontWeights.regular};
+  line-height: ${({theme}) => theme.typography.lineHeights.lg};
+  color: ${({theme}) => theme.text.secondary};
 `;
 
-export const StyledSuffix = styled(PrefixSuffix)<StyledTextFieldProps>`
-  right: 0;
-`;
-
-export const StyledDescription = styled.span<StyledTextFieldProps>`
-  ${({theme}) => `
-    margin-left: ${theme.gaps['sm-2']};
-    font-size: ${theme.typography.fontSizes.sm};
-    font-weight: ${theme.typography.fontWeights.regular};
-    line-height: ${theme.typography.lineHeights.lg};
-    color: ${theme.text.secondary};
-  `}
-`;
-
-export const StyledError = styled.span<StyledTextFieldProps>`
-  ${({theme}) => `
-    margin-left: ${theme.gaps['sm-2']};
-    font-size: ${theme.typography.fontSizes.sm};
-    font-weight: ${theme.typography.fontWeights.regular};
-    line-height: ${theme.typography.lineHeights.lg};
-    color: ${theme.text.error};
-  `}
+export const StyledError = styled.span`
+  display: block;
+  margin-top: ${({theme}) => theme.gaps.xs};
+  font-size: ${({theme}) => theme.typography.fontSizes.sm};
+  font-weight: ${({theme}) => theme.typography.fontWeights.regular};
+  line-height: ${({theme}) => theme.typography.lineHeights.lg};
+  color: ${({theme}) => theme.text.error};
 `;

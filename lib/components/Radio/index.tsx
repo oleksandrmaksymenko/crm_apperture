@@ -1,3 +1,4 @@
+import {useId} from 'react';
 import {
   StyledRadio,
   StyledRadioContainer,
@@ -9,6 +10,7 @@ export type RadioProps = Partial<{
   id: string;
   name: string;
   label: string;
+  value: string;
   disabled: boolean;
   isChecked: boolean;
   onChange: (arg: React.ChangeEvent<HTMLInputElement>) => void;
@@ -18,22 +20,30 @@ const Radio = ({
   id,
   label,
   name,
+  value,
   disabled,
   isChecked,
-  ...props
-}: RadioProps) => (
-  <StyledRadioContainer {...props}>
-    <StyledRadio
-      type='radio'
-      id={`${id}-radio`}
-      name={name}
-      checked={isChecked}
-      disabled={disabled}
-    />
-    <StyledRadioLabel htmlFor={`${id}-radio`} disabled={disabled}>
-      {label && <StyledRadioLabelText>{label}</StyledRadioLabelText>}
-    </StyledRadioLabel>
-  </StyledRadioContainer>
-);
+  onChange,
+}: RadioProps) => {
+  const generatedId = useId();
+  const inputId = `${id ?? generatedId}-radio`;
+
+  return (
+    <StyledRadioContainer>
+      <StyledRadio
+        type='radio'
+        id={inputId}
+        name={name}
+        value={value ?? id}
+        checked={isChecked}
+        disabled={disabled}
+        onChange={onChange}
+      />
+      <StyledRadioLabel htmlFor={inputId} disabled={disabled}>
+        {label && <StyledRadioLabelText>{label}</StyledRadioLabelText>}
+      </StyledRadioLabel>
+    </StyledRadioContainer>
+  );
+};
 
 export default Radio;

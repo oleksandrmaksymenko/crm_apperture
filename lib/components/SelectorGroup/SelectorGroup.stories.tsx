@@ -1,103 +1,64 @@
-import {Meta, StoryFn} from '@storybook/react';
-import SelectorGroup, {SelectorGroupProps} from './';
+import type {Meta, StoryObj} from '@storybook/react';
+import SelectorGroup from './';
 import Checkbox from '../Checkbox';
 import Radio from '../Radio';
 import Switcher from '../Switcher';
 
-export default {
+const meta = {
   title: 'Components/SelectorGroup',
   component: SelectorGroup,
-} as Meta;
+  tags: ['autodocs'],
+  args: {
+    gap: 'md',
+    direction: 'vertical',
+  },
+  argTypes: {
+    component: {
+      control: false,
+      description:
+        'Template element to clone for every entry in `group`, e.g. `<Checkbox />`, `<Radio />`, or `<Switcher />`.',
+    },
+    group: {
+      control: false,
+      description:
+        'Array of props cloned onto `component` for each item: `{ id, label, name?, disabled? }[]`. Not editable via Controls — set it directly in the story args.',
+    },
+  },
+} satisfies Meta<typeof SelectorGroup>;
 
-const Template: StoryFn<SelectorGroupProps> = args => (
-  <SelectorGroup {...args} />
-);
+export default meta;
 
-export const CheckboxView = Template.bind({});
-CheckboxView.args = {
-  component: <Checkbox />,
-  group: [
-    {
-      id: 'checkboxGroup',
-      label: 'Checkbox Group',
-    },
-    {
-      id: 'checkboxGroup2',
-      label: 'Checkbox Group 2',
-    },
-    {
-      id: 'checkboxGroup3',
-      label: 'Checkbox Group 3',
-    },
-    {
-      id: 'checkboxGroup4',
-      label: 'Checkbox Group 4',
-    },
-  ],
-  gap: 'md',
-  direction: 'vertical',
+type Story = StoryObj<typeof meta>;
+
+const namedGroup = (name: string) => [
+  {id: 'checkboxGroup', label: 'Checkbox Group', name, disabled: true},
+  {id: 'checkboxGroup2', label: 'Checkbox Group 2', name},
+  {id: 'checkboxGroup3', label: 'Checkbox Group 3', name},
+  {id: 'checkboxGroup4', label: 'Checkbox Group 4', name},
+];
+
+export const CheckboxView: Story = {
+  args: {
+    component: <Checkbox />,
+    group: [
+      {id: 'checkboxGroup', label: 'Checkbox Group'},
+      {id: 'checkboxGroup2', label: 'Checkbox Group 2'},
+      {id: 'checkboxGroup3', label: 'Checkbox Group 3'},
+      {id: 'checkboxGroup4', label: 'Checkbox Group 4'},
+    ],
+  },
 };
 
-export const RadioView = Template.bind({});
-RadioView.args = {
-  component: <Radio />,
-  group: [
-    {
-      id: 'checkboxGroup',
-      label: 'Checkbox Group',
-      name: 'radioGroup1',
-      disabled: true,
-    },
-    {
-      id: 'checkboxGroup2',
-      label: 'Checkbox Group 2',
-      name: 'radioGroup1',
-    },
-    {
-      id: 'checkboxGroup3',
-      label: 'Checkbox Group 3',
-      name: 'radioGroup1',
-    },
-    {
-      id: 'checkboxGroup4',
-      label: 'Checkbox Group 4',
-      name: 'radioGroup1',
-    },
-  ],
-  gap: 'md',
-  direction: 'vertical',
+export const RadioView: Story = {
+  args: {
+    component: <Radio />,
+    group: namedGroup('radioGroup1'),
+  },
 };
 
-export const SwitcherView = Template.bind({});
-SwitcherView.args = {
-  component: <Switcher />,
-  group: [
-    {
-      id: 'checkboxGroup',
-      label: 'Checkbox Group',
-      name: 'radioGroup1',
-      disabled: true,
-    },
-    {
-      id: 'checkboxGroup2',
-      label: 'Checkbox Group 2',
-      name: 'radioGroup1',
-    },
-    {
-      id: 'checkboxGroup3',
-      label: 'Checkbox Group 3',
-      name: 'radioGroup1',
-    },
-    {
-      id: 'checkboxGroup4',
-      label: 'Checkbox Group 4',
-      name: 'radioGroup1',
-    },
-  ],
-  gap: 'md',
-  direction: 'vertical',
+export const SwitcherView: Story = {
+  args: {
+    component: <Switcher id='' isChecked={false} onChange={() => {}} />,
+    group: namedGroup('radioGroup1'),
+  },
 };
-
-CheckboxView.argTypes = {};
-RadioView.argTypes = {};
-SwitcherView.argTypes = {};

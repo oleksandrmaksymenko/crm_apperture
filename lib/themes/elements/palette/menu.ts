@@ -1,20 +1,14 @@
-import {blueGrey} from '../../colors.ts';
-
 export const menu = {
-  menuListBackgroundColor: {
-    light: blueGrey[100],
-    dark: blueGrey[100],
-  },
   menuItemHoverBackgroundColor: {
-    light: blueGrey[200],
-    dark: blueGrey[200],
+    light: '#f4f4f5',
+    dark: '#27272a',
   },
   menuItemColor: {
-    light: blueGrey[900],
-    dark: blueGrey[900],
+    light: '#18181b',
+    dark: '#fafafa',
   },
   menuItemHoverColor: {
-    light: blueGrey[500],
-    dark: blueGrey[500],
+    light: '#4f46e5',
+    dark: '#6366f1',
   },
 };

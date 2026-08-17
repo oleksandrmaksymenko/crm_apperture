@@ -1,59 +1,70 @@
 import styled from '@emotion/styled';
+import {css} from '@emotion/react';
 import {ButtonProps} from './index';
 import {ThemeProps} from '../../themes';
 
-type ButtonStyledProps = ButtonProps & ThemeProps;
+type ButtonStyledProps = Omit<ButtonProps, 'children'> & {
+  children: React.ReactNode[];
+};
 
 const variantCollector = (
-  {colors, text}: ThemeProps,
+  theme: ThemeProps,
   variant: ButtonProps['variant'],
-) => `
-  background-color: ${colors[variant]};
-  color: ${text[variant]};
+) => css`
+  background: ${theme.colors[variant]};
+  border: 1px solid transparent;
+  color: ${variant === 'warning' ? theme.colors.black : theme.colors.white};
+
+  &:hover {
+    filter: brightness(0.92);
+  }
 `;
 
-const outline = ({colors, text}: ThemeProps) => `
-  background-color: transparent;
-  border: 1px solid ${colors.primary};
-  color: ${text.primary};
+const outline = (theme: ThemeProps) => css`
+  background: transparent;
+  border: 1px solid ${theme.colors.border};
+  color: ${theme.text.primary};
+
+  &:hover {
+    background: ${theme.colors.surface};
+    border-color: ${theme.colors.primary};
+  }
 `;
 
-const text = ({text}: ThemeProps) => `
-  background-color: transparent;
-  color: ${text.primary};
+const text = (theme: ThemeProps) => css`
+  background: transparent;
+  border: 1px solid transparent;
+  color: ${theme.text.primary};
+
+  &:hover {
+    background: ${theme.colors.surface};
+  }
 `;
 
-const disabled = ({colors, text}: ThemeProps) => `
-  background-color: ${colors.disabled};
-  color: ${text.disabled};
+const disabled = (theme: ThemeProps) => css`
+  background: ${theme.colors.background};
+  border: 1px solid ${theme.colors.border};
+  color: ${theme.text.disabled};
   cursor: not-allowed;
   pointer-events: none;
-  
-  &:hover {
-    box-shadow: none;
-  }
 `;
 
 export const StyledButton = styled.button<ButtonStyledProps>`
-  border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
+  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: box-shadow 0.3s ease;
+  transition:
+    filter 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
   user-select: none;
+  color: ${({theme}) => theme.text.primary};
 
   ${({isFullSize}) => (isFullSize ? `width: 100%;` : '')}
-
-  &:hover {
-    box-shadow: ${({theme}) => theme.shadows.lg};
-  }
-
-  &:active {
-    box-shadow: none;
-  }
 
   ${({icon, iconPosition, theme}) => {
     if (icon) {
@@ -100,12 +111,12 @@ export const StyledButton = styled.button<ButtonStyledProps>`
         return `padding: ${theme.gaps.sm} ${theme.gaps.md}; font-size: ${theme.typography.fontSizes.md};`;
     }
   }}
-  
+
   ${({icon, children, theme}) =>
     !children[1] &&
     icon &&
     `
     padding: ${theme.gaps.sm};
-    border-radius: 50%;
-  `})
+    border-radius: 8px;
+  `}
 `;

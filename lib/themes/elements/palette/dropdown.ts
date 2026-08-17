@@ -1,40 +1,26 @@
-import {blueGrey, deepOrange, grey} from '../../colors.ts';
-
 export const dropdown = {
-  dropdownContainerBackgroundColor: {
-    light: grey[400],
-    dark: grey[100],
-  },
   dropdownContainerDisabledBackgroundColor: {
-    light: deepOrange[400],
-    dark: deepOrange[100],
+    light: '#f4f4f5',
+    dark: '#18181b',
   },
   dropdownLabelColor: {
-    light: blueGrey[400],
-    dark: blueGrey[100],
-  },
-  dropdownBorderColor: {
-    light: blueGrey[100],
-    dark: grey[300],
+    light: '#18181b',
+    dark: '#fafafa',
   },
   dropdownIconFill: {
-    light: blueGrey[400],
-    dark: blueGrey[100],
+    light: '#71717a',
+    dark: '#a1a1aa',
   },
   dropdownListItemColor: {
-    light: blueGrey[400],
-    dark: blueGrey[100],
+    light: '#18181b',
+    dark: '#fafafa',
   },
-  dropdownListItemHomerColor: {
-    light: blueGrey[800],
-    dark: blueGrey[500],
+  dropdownListItemHoverColor: {
+    light: '#4f46e5',
+    dark: '#6366f1',
   },
   dropdownListItemHoverBackgroundColor: {
-    light: blueGrey[300],
-    dark: blueGrey[100],
-  },
-  dropdownListContainerBackgroundColor: {
-    light: grey[300],
-    dark: blueGrey[100],
+    light: '#f4f4f5',
+    dark: '#27272a',
   },
 };

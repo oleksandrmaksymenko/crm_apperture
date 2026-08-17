@@ -1,3 +1,4 @@
+import {useId} from 'react';
 import {
   StyledCheckbox,
   StyledCheckboxContainer,
@@ -20,20 +21,25 @@ const Checkbox = ({
   disabled,
   isChecked,
   ...props
-}: CheckboxProps) => (
-  <StyledCheckboxContainer>
-    <StyledCheckbox
-      type='checkbox'
-      {...props}
-      id={`${id}-checkbox`}
-      disabled={disabled}
-      checked={isChecked}
-    />
-    <StyledLabel htmlFor={`${id}-checkbox`} disabled={disabled}>
-      <CheckIcon />
-      {label && <StyledLabelText>{label}</StyledLabelText>}
-    </StyledLabel>
-  </StyledCheckboxContainer>
-);
+}: CheckboxProps) => {
+  const generatedId = useId();
+  const inputId = `${id ?? generatedId}-checkbox`;
+
+  return (
+    <StyledCheckboxContainer>
+      <StyledCheckbox
+        type='checkbox'
+        {...props}
+        id={inputId}
+        disabled={disabled}
+        checked={isChecked}
+      />
+      <StyledLabel htmlFor={inputId} disabled={disabled}>
+        <CheckIcon />
+        {label && <StyledLabelText>{label}</StyledLabelText>}
+      </StyledLabel>
+    </StyledCheckboxContainer>
+  );
+};
 
 export default Checkbox;

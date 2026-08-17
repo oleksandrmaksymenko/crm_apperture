@@ -1,4 +1,11 @@
-import {ThemeProvider} from '@emotion/react';
+import {PropsWithChildren} from 'react';
+import {ThemeProvider, Theme} from '@emotion/react';
 
-export const StyledThemeProvider: ThemeProvider = ({children, theme}) =>
-  ThemeProvider({theme, children});
+export type StyledThemeProviderProps = PropsWithChildren<{theme: Theme}>;
+
+export const StyledThemeProvider = ({
+  children,
+  theme,
+}: StyledThemeProviderProps) => (
+  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+);

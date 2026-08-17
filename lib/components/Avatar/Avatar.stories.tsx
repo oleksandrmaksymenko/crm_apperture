@@ -1,18 +1,30 @@
-import {Meta, StoryFn} from '@storybook/react';
-import Avatar, {AvatarProps} from './';
+import type {Meta, StoryObj} from '@storybook/react';
+import Avatar from './';
 
-export default {
+const meta = {
   title: 'Components/Avatar',
   component: Avatar,
-} as Meta;
+  tags: ['autodocs'],
+  argTypes: {
+    size: {
+      control: {type: 'select'},
+      options: ['medium', 'large'],
+    },
+    variant: {
+      control: {type: 'select'},
+      options: ['circle', 'rounded'],
+    },
+  },
+} satisfies Meta<typeof Avatar>;
 
-const Template: StoryFn<AvatarProps> = args => <Avatar {...args} />;
+export default meta;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  name: 'Oleksandr Maksymenko',
-  size: 'large',
-  variant: 'circle',
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    name: 'Oleksandr Maksymenko',
+    size: 'large',
+    variant: 'circle',
+  },
 };
-
-Primary.argTypes = {};

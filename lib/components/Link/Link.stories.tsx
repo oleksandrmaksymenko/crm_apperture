@@ -1,28 +1,38 @@
-import {Meta, StoryFn} from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 import Link from '.';
-import {typography} from '../../themes/typegraphy';
+import {typography} from '../../themes/typography';
 
-export default {
+const meta = {
   title: 'Components/Link',
   component: Link,
-} as Meta;
-
-const Template: StoryFn<any> = args => <Link {...args}>Lorem ipsum link</Link>;
-
-export const Primary = Template.bind({});
-Primary.args = {
-  href: '#',
-  underline: '',
-  size: 'sm',
-  selected: false,
-};
-
-Primary.argTypes = {
-  size: {
-    control: {type: 'select'},
-    options: Object.keys(typography.fontMixin),
+  tags: ['autodocs'],
+  argTypes: {
+    underline: {
+      control: {type: 'select'},
+      options: ['hover', 'always', 'disabled'],
+    },
+    size: {
+      control: {type: 'select'},
+      options: Object.keys(typography.fontMixin),
+    },
+    selected: {
+      control: {type: 'boolean'},
+    },
+    href: {
+      control: false,
+    },
   },
-  selected: {
-    control: {type: 'boolean'},
+} satisfies Meta<typeof Link>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    children: 'Lorem ipsum link',
+    href: '#',
+    size: 'sm',
+    selected: false,
   },
 };

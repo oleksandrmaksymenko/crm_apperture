@@ -1,35 +1,50 @@
-import {Meta, StoryFn} from '@storybook/react';
-import TableContainer, {
-  TableContainerType,
-  TableContainerTypeProps,
-} from './TableContainer';
+import type {Meta, StoryObj} from '@storybook/react';
+import {action} from '@storybook/addon-actions';
+import TableContainer, {TableContainerType} from './TableContainer';
 import MenuList from '../Menu/MenuList';
 import MenuItem from '../Menu/MenuItem';
 import Position from '../Position';
 
-export default {
+const meta = {
   title: 'Components/Table',
   component: TableContainer,
-} as Meta;
+  tags: ['autodocs'],
+  argTypes: {
+    tableConfig: {
+      control: false,
+      description:
+        'Array of table definitions: `{ head, bodyProps, body, withCheckbox?, withActions? }[]`. Not editable via Controls — set it directly in the story args.',
+    },
+  },
+} satisfies Meta<typeof TableContainer>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+const RowMenu = ({close}: {close: () => void}) => {
+  const select = (name: string) => () => {
+    action(name)();
+    close();
+  };
+
+  return (
+    <Position placement='bottom-center'>
+      <MenuList>
+        <MenuItem onClick={select('edit')}>Edit</MenuItem>
+        <MenuItem onClick={select('duplicate')}>Duplicate</MenuItem>
+        <MenuItem onClick={select('delete')}>Delete</MenuItem>
+      </MenuList>
+    </Position>
+  );
+};
 
 const tableConfig: TableContainerType['tableConfig'][] = [
   {
     head: [
-      {
-        title: 'id',
-        sortBy: 'id',
-        onClick: (arg?: unknown) => arg,
-      },
-      {
-        title: 'name',
-        sortBy: 'name',
-        onClick: (arg?: unknown) => arg,
-      },
-      {
-        title: 'companyName',
-        sortBy: 'companyName',
-        onClick: (arg?: unknown) => arg,
-      },
+      {title: 'id', sortBy: 'id'},
+      {title: 'name', sortBy: 'name'},
+      {title: 'companyName', sortBy: 'companyName'},
     ],
     bodyProps: {
       title: 'title',
@@ -37,46 +52,23 @@ const tableConfig: TableContainerType['tableConfig'][] = [
       companyName: 'companyName',
     },
     body: [
-      {
-        title: '1',
-        name: 'string',
-        companyName: 'Test Name',
-        Menu: () => (
-          <Position placement='top-end'>
-            <MenuList>
-              <MenuItem>First Item</MenuItem>
-              <MenuItem>First Item</MenuItem>
-              <MenuItem>First Item</MenuItem>
-              <MenuItem>First Item</MenuItem>
-              <MenuItem>First Item</MenuItem>
-              <MenuItem>First Item</MenuItem>
-            </MenuList>
-          </Position>
-        ),
-      },
-      {
-        title: '2',
-        name: 'string',
-        companyName: 'Test Name',
-      },
-      {
-        title: '3',
-        name: 'string',
-        companyName: 'Test Name',
-      },
+      {title: '1', name: 'string', companyName: 'Test Name', Menu: RowMenu},
+      {title: '2', name: 'string', companyName: 'Test Name', Menu: RowMenu},
+      {title: '3', name: 'string', companyName: 'Test Name', Menu: RowMenu},
     ],
-    withCheckbox: false,
+    withCheckbox: true,
     withActions: true,
   },
 ];
 
-const Template: StoryFn<TableContainerTypeProps> = args => (
-  <TableContainer {...args} />
-);
-
-export const Primary = Template.bind({});
-Primary.args = {
-  tableConfig,
+export const Primary: Story = {
+  args: {
+    tableConfig,
+  },
 };
 
-Primary.argTypes = {};
+export const MultipleTables: Story = {
+  args: {
+    tableConfig: [...tableConfig, ...tableConfig],
+  },
+};

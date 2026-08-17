@@ -1,4 +1,5 @@
 import {useState, useEffect, useRef} from 'react';
+import {useTheme} from '@emotion/react';
 import {
   StyledActionsContainer,
   StyledTableCell,
@@ -7,8 +8,6 @@ import {
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 import {MoreVerticalIcon} from '../../assets/icons';
-import {useTheme} from '@emotion/react';
-import {uuid} from '../../functions/uuid';
 import {BodyItemProps, TableContainerType} from './TableContainer.tsx';
 import useClickOutside from '../../hooks/useClickOutside.ts';
 
@@ -16,11 +15,12 @@ type TableRowProps = {
   item: TableContainerType['tableConfig'];
   bodyItem: BodyItemProps;
   i: number;
+  tableIndex: number;
   isSelectedAll: boolean;
   length: number;
   withCheckbox?: boolean;
   withActions?: boolean;
-  Menu?: () => React.JSX.Element;
+  Menu?: (props: {close: () => void}) => React.JSX.Element;
 };
 
 const TableRow = ({
@@ -28,12 +28,13 @@ const TableRow = ({
   item,
   Menu,
   length,
+  tableIndex,
   bodyItem,
   withActions,
   withCheckbox,
   isSelectedAll,
 }: TableRowProps) => {
-  const {colors} = useTheme() as {colors: {tableRowIconFillColor: string}};
+  const {colors} = useTheme();
   const actionsContainerRef = useRef<HTMLDivElement>(null);
   const [isActive, setActive] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,11 +48,11 @@ const TableRow = ({
   };
 
   const handleClickOnActions = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(open => !open);
   };
 
   useClickOutside(actionsContainerRef, () => {
-    isMenuOpen ? setIsMenuOpen(false) : () => null;
+    if (isMenuOpen) setIsMenuOpen(false);
   });
 
   return (
@@ -65,12 +66,14 @@ const TableRow = ({
       {withCheckbox && (
         <Checkbox
           onChange={handleChange}
-          id={`row-${i}`}
+          id={`row-${tableIndex}-${i}`}
           isChecked={isActive}
         />
       )}
-      {Object.values(item.bodyProps).map((prop: keyof BodyItemProps) => (
-        <StyledTableCell key={uuid()}>{bodyItem[prop]}</StyledTableCell>
+      {Object.keys(item.bodyProps).map((prop, propIndex) => (
+        <StyledTableCell key={prop} data-label={item.head[propIndex]?.title}>
+          {bodyItem[prop as Exclude<keyof BodyItemProps, 'Menu'>]}
+        </StyledTableCell>
       ))}
       {Menu && withActions && (
         <StyledActionsContainer ref={actionsContainerRef}>
@@ -80,9 +83,10 @@ const TableRow = ({
             iconPosition='left'
             isFullSize={false}
             onClick={handleClickOnActions}
+            aria-label='Row actions'
             icon={<MoreVerticalIcon fill={colors.tableRowIconFillColor} />}
           />
-          {isMenuOpen && <Menu />}
+          {isMenuOpen && <Menu close={() => setIsMenuOpen(false)} />}
         </StyledActionsContainer>
       )}
     </StyledTableRow>

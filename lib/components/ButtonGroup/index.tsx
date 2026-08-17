@@ -1,14 +1,13 @@
 import Button, {ButtonProps} from '../Button';
 import {StyledButtonGroup} from './ButtonGroup.styled';
 import {SpacingType, ThemeColorType} from '../../global.types';
-import {gaps} from '../../themes/gaps.ts';
 
 export type ButtonGroupProps = {
   buttons: ButtonProps[];
 } & Partial<{
   gap: SpacingType;
   direction: 'vertical' | 'horizontal';
-  position: 'flex-start' | 'center' | 'flex-end';
+  position: 'start' | 'center' | 'end';
   bottomGutter: SpacingType;
   bg: ThemeColorType;
   padding: SpacingType;
@@ -18,7 +17,7 @@ export type ButtonGroupProps = {
 const ButtonGroup = ({
   buttons,
   direction = 'horizontal',
-  gap = gaps.md,
+  gap = 'md',
   position,
   bottomGutter,
   ...rest

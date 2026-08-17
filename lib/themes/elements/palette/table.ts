@@ -1,36 +1,22 @@
-import {blueGrey, grey} from '../../colors.ts';
-
 export const table = {
-  tableBorderColor: {
-    light: grey[500],
-    dark: grey[100],
-  },
   tableHeaderColor: {
-    light: blueGrey[100],
-    dark: blueGrey[100],
-  },
-  tableHeaderBackgroundColor: {
-    light: grey[500],
-    dark: grey[100],
+    light: '#71717a',
+    dark: '#a1a1aa',
   },
   tableRowActiveBackgroundColor: {
-    light: grey[500],
-    dark: grey[100],
+    light: '#eef2ff',
+    dark: '#1e1b4b',
   },
   tableRowHoverBackgroundColor: {
-    light: grey[400],
-    dark: grey[50],
-  },
-  tableRowHoverColor: {
-    light: grey[900],
-    dark: grey[500],
+    light: '#fafafa',
+    dark: '#1f1f23',
   },
   tableBodyColor: {
-    light: blueGrey[100],
-    dark: blueGrey[100],
+    light: '#18181b',
+    dark: '#fafafa',
   },
   tableRowIconFillColor: {
-    light: grey[900],
-    dark: grey[500],
+    light: '#71717a',
+    dark: '#a1a1aa',
   },
 };

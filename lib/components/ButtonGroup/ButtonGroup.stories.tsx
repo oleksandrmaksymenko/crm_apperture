@@ -1,73 +1,57 @@
-import {Meta, StoryFn} from '@storybook/react';
-import ButtonGroup, {ButtonGroupProps} from './';
+import type {Meta, StoryObj} from '@storybook/react';
+import ButtonGroup from './';
 import {gaps} from '../../themes/gaps';
-import {darkTheme, lightTheme} from '../../themes';
 
-export default {
+const meta = {
   title: 'Components/ButtonGroup',
   component: ButtonGroup,
-} as Meta;
+  tags: ['autodocs'],
+  argTypes: {
+    gap: {
+      control: {type: 'select'},
+      options: Object.keys(gaps),
+    },
+    bottomGutter: {
+      control: {type: 'select'},
+      options: Object.keys(gaps),
+    },
+    padding: {
+      control: {type: 'select'},
+      options: Object.keys(gaps),
+    },
+    direction: {
+      control: {type: 'select'},
+      options: ['vertical', 'horizontal'],
+    },
+    position: {
+      control: {type: 'select'},
+      options: ['start', 'center', 'end'],
+    },
+    buttons: {
+      control: false,
+      description:
+        'Array of `ButtonProps` rendered as the group\'s buttons: `{ children, variant, size, onClick?, ... }[]`. Not editable via Controls — set it directly in the story args.',
+    },
+  },
+} satisfies Meta<typeof ButtonGroup>;
 
-const Template: StoryFn<ButtonGroupProps> = args => <ButtonGroup {...args} />;
+export default meta;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  buttons: [
-    {
-      children: 'Click me',
-      variant: 'primary',
-      size: 'medium',
-      onClick: () => null,
-    },
-    {
-      children: 'Click me',
-      variant: 'primary',
-      size: 'medium',
-      onClick: () => null,
-    },
-    {
-      children: 'Click me',
-      variant: 'primary',
-      size: 'medium',
-      onClick: () => null,
-    },
-    {
-      children: 'Click me',
-      variant: 'primary',
-      size: 'medium',
-      onClick: () => null,
-    },
-  ],
-  direction: 'horizontal',
-  position: 'center',
-  gap: gaps['sm-2'],
-  bottomGutter: gaps['lg'],
-  bg: darkTheme.colors.primary,
-  padding: gaps['sm'],
-  isFullWidth: true,
-};
+type Story = StoryObj<typeof meta>;
 
-Primary.argTypes = {
-  gap: {
-    control: {type: 'select'},
-    defaultValue: gaps.md,
-    options: Object.keys(gaps),
-  },
-  bottomGutter: {
-    control: {type: 'select'},
-    options: Object.keys(gaps),
-  },
-  padding: {
-    control: {type: 'select'},
-    options: Object.keys(gaps),
-  },
-  bg: {
-    control: {type: 'select'},
-    options: Object.keys(lightTheme.colors),
-  },
-  direction: {
-    control: {type: 'select'},
-    defaultValue: 'vertical',
-    options: ['vertical', 'horizontal'],
+export const Primary: Story = {
+  args: {
+    buttons: [
+      {children: 'Click me', variant: 'primary', size: 'medium'},
+      {children: 'Click me', variant: 'primary', size: 'medium'},
+      {children: 'Click me', variant: 'primary', size: 'medium'},
+      {children: 'Click me', variant: 'primary', size: 'medium'},
+    ],
+    direction: 'horizontal',
+    position: 'center',
+    gap: 'sm-2',
+    bottomGutter: 'lg',
+    padding: 'sm',
+    isFullWidth: true,
   },
 };

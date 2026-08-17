@@ -1,11 +1,9 @@
-import {darkTheme, lightTheme} from './themes';
+import type {Palette} from './themes/palette.ts';
 import {gaps} from './themes/gaps.ts';
 import {sizing} from './themes/sizing.ts';
 
-export type ThemeColorType = (typeof darkTheme | typeof lightTheme)[
-  | keyof typeof darkTheme
-  | keyof typeof lightTheme];
+export type ThemeColorType = keyof Palette;
 
-export type SpacingType = (typeof gaps)[keyof typeof gaps];
+export type SpacingType = keyof typeof gaps;
 
-export type SizingType = (typeof sizing)[keyof typeof sizing];
+export type SizingType = keyof typeof sizing;

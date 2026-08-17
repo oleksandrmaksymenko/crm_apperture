@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import {PopupProps} from './index';
-import {ThemeProps} from '../../themes';
 import Paper from '../Paper';
 
-type PopupStyledProps = PopupProps & ThemeProps & {isFooter: boolean};
+type PopupStyledProps = Partial<PopupProps>;
 
 export const StyledPopup = styled.div<PopupStyledProps>`
   position: fixed;
@@ -31,31 +30,40 @@ export const StyledPopupContent = styled(Paper)<PopupStyledProps>`
   width: 100%;
   position: relative;
   box-sizing: border-box;
-  max-width: ${({theme, size}) => theme.sizing[size]};
+  max-width: ${({theme, size}) => theme.sizing[size || 'md']};
   padding: ${({gutter, theme}) => theme.gaps[gutter || 'sm']};
   height: ${({size}) => (size === 'xl' ? '100%' : 'auto')};
+  outline: none;
 `;
 
 export const StyledPopupHeader = styled.div<
-  PopupStyledProps & {isHeader: boolean}
+  PopupStyledProps & {isTitle: boolean}
 >`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${({theme, isHeader}) => (isHeader ? theme.gaps.md : 0)};
-
-  h2 {
-    margin: 0;
-  }
+  margin-bottom: ${({theme, isTitle}) => (isTitle ? theme.gaps.md : 0)};
 `;
 
-export const StyledPopupBody = styled.div<PopupStyledProps>`
-  height: calc(${({theme, size}) => theme.sizing[size]} - 42px - 32px - 50px);
+export const StyledPopupTitle = styled.h2`
+  margin: 0;
+  font-size: ${({theme}) => theme.typography.fontSizes.xl};
+  font-weight: ${({theme}) => theme.typography.fontWeights.bold};
+  color: ${({theme}) => theme.text.primary};
+`;
+
+export const StyledPopupBody = styled.div<
+  PopupStyledProps & {isFooter: boolean}
+>`
+  height: calc(${({theme, size}) => theme.sizing[size || 'md']} - 42px - 32px - 50px);
   margin-bottom: ${({theme, isFooter}) => isFooter && theme.gaps.md};
   overflow-y: auto;
 `;
 
-export const StyledPopupFooter = styled.div<PopupStyledProps>`
+export const StyledPopupFooter = styled.div<PopupStyledProps & {isFooter?: boolean}>`
   display: flex;
   justify-content: flex-end;
+  ${({isFooter, theme}) =>
+    isFooter &&
+    `padding-top: ${theme.gaps.md}; border-top: 1px solid ${theme.colors.border};`}
 `;

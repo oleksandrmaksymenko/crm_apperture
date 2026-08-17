@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import {AvatarProps} from './index.tsx';
-import {ThemeProps} from '../../themes';
 
 const sizes = {
   medium: '40px',
@@ -36,11 +35,9 @@ export const StyledAvatar = styled.div<
   },
 }));
 
-export const StyledAvatarBadge = styled.div<
-  {
-    notificationColor: AvatarProps['notificationColor'];
-  } & ThemeProps
->`
+export const StyledAvatarBadge = styled.div<{
+  notificationColor: AvatarProps['notificationColor'];
+}>`
   padding: 0 6px;
   display: flex;
   justify-content: center;
@@ -51,7 +48,8 @@ export const StyledAvatarBadge = styled.div<
   min-width: 24px;
   height: 24px;
   border-radius: 12px;
-  background-color: ${({theme}) => theme.colors.notification};
-  color: ${({theme}) => theme.text.primary};
+  background-color: ${({theme, notificationColor}) =>
+    theme.colors[notificationColor || 'notification']};
+  color: ${({theme}) => theme.colors.white};
   font-size: ${({theme}) => theme.typography.fontSizes.xs};
 `;

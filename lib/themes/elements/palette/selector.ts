@@ -1,40 +1,34 @@
-import {blueGrey} from '../../colors.ts';
-
 export const selector = {
-  selectorBorderColor: {
-    light: blueGrey[100],
-    dark: blueGrey[100],
-  },
   selectorBackgroundColor: {
-    light: blueGrey[100],
-    dark: blueGrey[100],
+    light: '#4f46e5',
+    dark: '#6366f1',
   },
   selectorDisabledBorderColor: {
-    light: '#4b1010',
-    dark: '#222291',
+    light: '#d4d4d8',
+    dark: '#3f3f46',
   },
   selectorDisabledBackgroundColor: {
-    light: '#691515',
-    dark: '#242479',
+    light: '#e4e4e7',
+    dark: '#27272a',
   },
   selectorLabelText: {
-    light: '#111827',
-    dark: '#fefefe',
+    light: '#18181b',
+    dark: '#fafafa',
   },
   checkboxSvgFill: {
-    light: '#20a124',
-    dark: '#111827',
+    light: '#ffffff',
+    dark: '#ffffff',
   },
   checkboxDisabledSvgFill: {
-    light: '#20a124',
-    dark: '#ea134e',
+    light: '#a1a1aa',
+    dark: '#71717a',
   },
   checkboxBackgroundColor: {
-    light: '#20a124',
-    dark: '#ea134e',
+    light: '#d4d4d8',
+    dark: '#3f3f46',
   },
   radioBorderActiveColor: {
-    light: '#f33',
-    dark: '#f33',
+    light: '#4f46e5',
+    dark: '#6366f1',
   },
 };

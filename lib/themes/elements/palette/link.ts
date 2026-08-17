@@ -1,20 +1,18 @@
-import {deepOrange, green} from '../../colors.ts';
-
 export const link = {
   linkColor: {
-    light: deepOrange[100],
-    dark: deepOrange[500],
+    light: '#4f46e5',
+    dark: '#6366f1',
   },
   linkColorHover: {
-    light: deepOrange[300],
-    dark: deepOrange[700],
+    light: '#4338ca',
+    dark: '#818cf8',
   },
   linkUnderlineColor: {
-    light: deepOrange[100],
-    dark: deepOrange[500],
+    light: '#4f46e5',
+    dark: '#6366f1',
   },
   linkColorSelected: {
-    light: green[300],
-    dark: green[500],
+    light: '#16a34a',
+    dark: '#4ade80',
   },
 };

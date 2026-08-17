@@ -1,4 +1,4 @@
-import {Children} from 'react';
+import {Children, isValidElement} from 'react';
 import {StyledAvatar, StyledAvatarBadge} from './Avatar.styled.tsx';
 import {ThemeColorType} from '../../global.types.ts';
 
@@ -15,7 +15,6 @@ const stringToColor = (string: string) => {
   let hash = 0;
   let i;
 
-  /* eslint-disable no-bitwise */
   for (i = 0; i < string.length; i += 1) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
@@ -26,7 +25,6 @@ const stringToColor = (string: string) => {
     const value = (hash >> (i * 8)) & 0xff;
     color += `00${value.toString(16)}`.slice(-2);
   }
-  /* eslint-enable no-bitwise */
 
   return color;
 };
@@ -56,23 +54,28 @@ const getFontColor = (bgColor: string) => {
     return '#000';
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  const luminance = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255;
+  const luminance =
+    (0.299 * Number(rgb[0]) + 0.587 * Number(rgb[1]) + 0.114 * Number(rgb[2])) /
+    255;
 
   // Choose white or black font color based on luminance
   return luminance > 0.5 ? '#000' : '#fff';
 };
 
-const stringAvatar = (name: string) => ({
-  backgroundColor: stringToColor(name),
-  color: getFontColor(hexToRgb(stringToColor(name))),
-  coloredName: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-});
+const stringAvatar = (name: string) => {
+  const splitName = name.split(' ');
+  const hasMiddleName = splitName.length > 1;
+
+  return {
+    backgroundColor: stringToColor(name),
+    color: getFontColor(hexToRgb(stringToColor(name))),
+    coloredName: `${splitName[0][0]}${hasMiddleName ? splitName[1][0] : ''}`,
+  };
+};
 
 const Avatar = (props: AvatarProps) => {
-  const imageOrDefaultAvatar = Children.toArray(props.children).map(
-    (child: any) => (child.type === 'img' ? child : null),
+  const imageOrDefaultAvatar = Children.toArray(props.children).map(child =>
+    isValidElement(child) && child.type === 'img' ? child : null,
   );
 
   const BadgeAvatar = () =>

@@ -1,8 +1,19 @@
 import styled from '@emotion/styled';
-import {PopupProps} from '../Popup';
-import {ThemeProps} from '../../themes';
+import {ButtonGroupProps} from './index.tsx';
 
-type StyledButtonGroupProps = PopupProps & ThemeProps;
+export type PositionVariantsType = {
+  start: string;
+  end: string;
+  center: string;
+};
+
+type StyledButtonGroupProps = Partial<ButtonGroupProps & PositionVariantsType>;
+
+const positionVariants: PositionVariantsType = {
+  start: 'flex-start',
+  end: 'flex-end',
+  center: 'center',
+};
 
 export const StyledButtonGroup = styled.div<StyledButtonGroupProps>(props => {
   const isVertical = props.direction === 'vertical';
@@ -12,12 +23,15 @@ export const StyledButtonGroup = styled.div<StyledButtonGroupProps>(props => {
     ...(props.bottomGutter && {
       marginBottom: props.theme.gaps[props.bottomGutter],
     }),
-    padding: props.theme.gaps[props.padding],
+    ...(props.padding && {padding: props.theme.gaps[props.padding]}),
     display: 'flex',
     flexDirection: isVertical ? 'column' : 'row',
-    gap: props.theme.gaps[props.gap],
-    ...(isVertical && {alignItems: props.position}),
-    ...(!isVertical && {justifyContent: props.position}),
-    backgroundColor: props.theme.colors[props.bg],
+    ...(props.gap && {gap: props.theme.gaps[props.gap]}),
+    ...(isVertical && {
+      alignItems: props.position && positionVariants[props.position],
+    }),
+    ...(!isVertical && {
+      justifyContent: props.position && positionVariants[props.position],
+    }),
   };
 });

@@ -1,21 +1,40 @@
-import {Meta, StoryFn} from '@storybook/react';
+import {useState} from 'react';
+import type {Meta, StoryObj} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
-import Checkbox, {CheckboxProps} from './';
+import Checkbox from './';
 
-export default {
+const meta = {
   title: 'Components/Checkbox',
   component: Checkbox,
-} as Meta;
+  tags: ['autodocs'],
+  args: {
+    onChange: action('on-change'),
+  },
+} satisfies Meta<typeof Checkbox>;
 
-const Template: StoryFn<CheckboxProps> = args => <Checkbox {...args} />;
+export default meta;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  onChange: action('on-change'),
-  id: 'test-checkbox',
-  label: 'text',
-  disabled: true,
-  isChecked: true,
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    id: 'test-checkbox',
+    label: 'text',
+    disabled: false,
+  },
 };
 
-Primary.argTypes = {};
+export const Interactive: Story = {
+  render: () => {
+    const [checked, setChecked] = useState(false);
+
+    return (
+      <Checkbox
+        id='interactive-checkbox'
+        label='Accept terms and conditions'
+        isChecked={checked}
+        onChange={e => setChecked(e.target.checked)}
+      />
+    );
+  },
+};

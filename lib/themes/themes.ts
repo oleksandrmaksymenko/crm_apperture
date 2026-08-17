@@ -1,31 +1,32 @@
 import {gaps} from './gaps.ts';
 import {shadows} from './shadows';
-import {typography} from './typegraphy';
+import {typography} from './typography';
 import {breakpoints} from './breakpoints';
-import {palette} from './palette';
+import {palette, Palette} from './palette';
 import {sizing} from './sizing';
 
-type PaletteType = any;
+type ColorValue = {light: string; dark: string};
+type ColorMap = Record<string, string>;
 
-const lightPalette: PaletteType = {};
-const darkPalette: PaletteType = {};
-const lightTextPalette: PaletteType = {};
-const darkTextPalette: PaletteType = {};
+const lightPalette: ColorMap = {};
+const darkPalette: ColorMap = {};
+const lightTextPalette: ColorMap = {};
+const darkTextPalette: ColorMap = {};
 
-Object.keys(palette).forEach(key => {
-  const lightValue = palette[key]['light'];
-  const darkValue = palette[key]['dark'];
-  if (darkValue) darkPalette[key] = darkValue;
-  if (lightValue) lightPalette[key] = lightValue;
-
+(Object.keys(palette) as (keyof Palette)[]).forEach(key => {
   if (key === 'text') {
-    Object.keys(palette[key]).forEach(textKey => {
-      const lightTextValue = palette[key][textKey]['light'];
-      const darkTextValue = palette[key][textKey]['dark'];
-      if (darkTextValue) darkTextPalette[textKey] = darkTextValue;
-      if (lightTextValue) lightTextPalette[textKey] = lightTextValue;
+    const textPalette = palette.text as Record<string, ColorValue>;
+    Object.keys(textPalette).forEach(textKey => {
+      const {light, dark} = textPalette[textKey];
+      if (dark) darkTextPalette[textKey] = dark;
+      if (light) lightTextPalette[textKey] = light;
     });
+    return;
   }
+
+  const {light, dark} = palette[key] as ColorValue;
+  if (dark) darkPalette[key] = dark;
+  if (light) lightPalette[key] = light;
 });
 
 const transition = '0.3s';

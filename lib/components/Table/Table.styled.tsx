@@ -1,38 +1,35 @@
 import styled from '@emotion/styled';
-import {ThemeProps} from '../../themes';
-import {TableContainerTypeProps} from './TableContainer.tsx';
-
-type StyledInputGroupProps = TableContainerTypeProps & ThemeProps;
+import {surfaceCard} from '../../themes';
 
 const tableTemplateColumn = (
   length: number,
-  withCheckbox: boolean,
-  withActions: boolean,
+  withCheckbox?: boolean,
+  withActions?: boolean,
 ): string =>
   `${withCheckbox ? '40px' : ''} minmax(40px, 60px) repeat(${length - 1}, 1fr) ${withActions ? '42px' : ''}`;
 
-export const StyledTable = styled.div<StyledInputGroupProps>`
-  ${({theme}) => ({
-    fontFamily: theme.typography.fontFamily,
-    fontSize: theme.typography.fontSizes.md,
-    lineHeight: theme.typography.lineHeights.xxl,
-  })};
+type TableGridProps = {
+  length: number;
+  withCheckbox?: boolean;
+  withActions?: boolean;
+};
+
+export const StyledTable = styled.div`
+  font-family: ${({theme}) => theme.typography.fontFamily};
+  font-size: ${({theme}) => theme.typography.fontSizes.md};
+  line-height: ${({theme}) => theme.typography.lineHeights.xxl};
+  ${({theme}) => surfaceCard(theme, '10px')};
 `;
 
-export const StyledTableHead = styled.div<
-  StyledInputGroupProps & {
-    length: number;
-    withCheckbox: boolean;
-    withActions: boolean;
-  }
->`
+export const StyledTableHead = styled.div<TableGridProps>`
   display: grid;
   grid-template-columns: ${({length, withCheckbox, withActions}) =>
     tableTemplateColumn(length, withCheckbox, withActions)};
+  padding: ${({theme}) => theme.gaps.sm} 0;
+  border-bottom: 1px solid ${({theme}) => theme.colors.border};
 
   ${({theme}) => ({
     color: theme.colors.tableHeaderColor,
-    backgroundColor: theme.colors.tableHeaderBackgroundColor,
   })};
 
   &:first-of-type {
@@ -42,19 +39,26 @@ export const StyledTableHead = styled.div<
   & > div {
     cursor: pointer;
   }
+
+  @media (max-width: ${({theme}) => theme.breakpoints.md}) {
+    display: none;
+  }
 `;
 
 export const StyledTableRow = styled.div<
-  StyledInputGroupProps & {
-    isSelected?: boolean;
-    length: number;
-  }
+  TableGridProps & {isSelected?: boolean}
 >`
   height: 42px;
   display: grid;
   grid-template-columns: ${({length, withCheckbox, withActions}) =>
     tableTemplateColumn(length, withCheckbox, withActions)};
   padding-left: 8px;
+  border-bottom: 1px solid ${({theme}) => theme.colors.border};
+  transition: background-color 0.15s ease;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 
   ${({isSelected, theme}) => ({
     backgroundColor: isSelected
@@ -62,15 +66,41 @@ export const StyledTableRow = styled.div<
       : 'transparent',
   })}
 
+  &:hover {
+    background-color: ${({theme}) => theme.colors.tableRowHoverBackgroundColor};
+  }
+
   ${({theme}) => ({
     color: theme.colors.tableBodyColor,
   })};
+
+  @media (max-width: ${({theme}) => theme.breakpoints.md}) {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: ${({theme}) => theme.gaps.xs};
+    padding: ${({theme}) => theme.gaps.md};
+  }
 `;
 
-export const StyledTableCell = styled.div<StyledInputGroupProps>`
+export const StyledTableCell = styled.div`
   padding: 4px;
   display: flex;
   align-items: center;
+
+  @media (max-width: ${({theme}) => theme.breakpoints.md}) {
+    justify-content: space-between;
+    width: 100%;
+    padding: 2px 0;
+
+    &::before {
+      content: attr(data-label);
+      font-weight: ${({theme}) => theme.typography.fontWeights.medium};
+      color: ${({theme}) => theme.colors.tableHeaderColor};
+      margin-right: ${({theme}) => theme.gaps.sm};
+    }
+  }
 `;
 
 export const StyledActionsContainer = styled.div`

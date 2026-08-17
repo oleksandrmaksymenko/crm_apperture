@@ -1,172 +1,75 @@
-import {deepOrange, green, indigo, lightGreen, teal, yellow} from './colors.ts';
 import {elementPalette} from './elements/palette.ts';
 
-export const palette: any = {
+export const palette = {
   primary: {
-    light: teal[700],
-    dark: green[300],
+    light: '#4f46e5',
+    dark: '#6366f1',
   },
   secondary: {
-    light: '#ff0080',
-    dark: '#ff0080',
+    light: '#db2777',
+    dark: '#ec4899',
   },
   tertiary: {
-    light: indigo['A700'],
-    dark: indigo[800],
-  },
-  default: {
-    light: green[50],
-    dark: lightGreen[50],
+    light: '#0891b2',
+    dark: '#22d3ee',
   },
   error: {
-    light: deepOrange[700],
-    dark: deepOrange[700],
+    light: '#dc2626',
+    dark: '#f87171',
   },
   warning: {
-    light: yellow[800],
-    dark: yellow[800],
+    light: '#b45309',
+    dark: '#d97706',
   },
   success: {
-    light: lightGreen[400],
-    dark: lightGreen[400],
+    light: '#16a34a',
+    dark: '#4ade80',
   },
   info: {
-    light: teal[600],
-    dark: teal[600],
+    light: '#2563eb',
+    dark: '#60a5fa',
   },
   text: {
     primary: {
-      light: '#fff',
-      dark: '#111827',
+      light: '#18181b',
+      dark: '#fafafa',
     },
     secondary: {
-      light: '#fff',
-      dark: '#111827',
-    },
-    tertiary: {
-      light: '#fff',
-      dark: '#fff',
-    },
-    default: {
-      light: '#fff',
-      dark: '#111827',
+      light: '#52525b',
+      dark: '#a1a1aa',
     },
     error: {
-      light: '#dd1a1a',
-      dark: '#d83f13',
-    },
-    warning: {
-      light: '#fff',
-      dark: '#111827',
-    },
-    success: {
-      light: '#fff',
-      dark: '#111827',
-    },
-    info: {
-      light: '#fff',
-      dark: '#fef',
-    },
-    link: {
-      light: '#fff',
-      dark: '#111827',
+      light: '#dc2626',
+      dark: '#f87171',
     },
     disabled: {
-      light: '#999',
-      dark: '#999',
-    },
-    placeholder: {
-      light: '#999',
-      dark: '#999',
-    },
-    icon: {
-      light: '#333',
-      dark: '#fff',
-    },
-    muted: {
-      light: '#6c757d',
-      dark: '#6c757d',
+      light: '#a1a1aa',
+      dark: '#52525b',
     },
   },
   background: {
-    light: '#fdfdff',
-    dark: '#111827',
+    light: '#f4f4f5',
+    dark: '#09090b',
+  },
+  surface: {
+    light: '#ffffff',
+    dark: '#18181b',
   },
   border: {
-    light: '#333',
-    dark: '#ccc',
-  },
-  borderActive: {
-    light: '#da0a0a',
-    dark: '#499b88',
-  },
-  shadow: {
-    light: '#ccc',
-    dark: '#333',
-  },
-  link: {
-    light: '#007bff',
-    dark: '#333',
-  },
-  disabled: {
-    light: '#ccc',
-    dark: '#333',
-  },
-  placeholder: {
-    light: '#999',
-    dark: '#333',
-  },
-  icon: {
-    light: '#333',
-    dark: '#333',
-  },
-  divider: {
-    light: '#ccc',
-    dark: '#333',
-  },
-  focus: {
-    light: '#007bff',
-    dark: '#333',
-  },
-  hover: {
-    light: '#f8f9fa',
-    dark: '#333',
-  },
-  active: {
-    light: '#e9ecef',
-    dark: '#333',
-  },
-  selected: {
-    light: '#007bff',
-    dark: '#333',
-  },
-  visited: {
-    light: '#6610f2',
-    dark: '#333',
-  },
-  muted: {
-    light: '#6c757d',
-    dark: '#333',
-  },
-  accent: {
-    light: '#007bff',
-    dark: '#333',
-  },
-  popupBackground: {
-    light: 'rgba(0,0,0,0.5)',
-    dark: 'rgba(0,0,0,0.5)',
+    light: '#e4e4e7',
+    dark: '#27272a',
   },
   notification: {
-    light: deepOrange[800],
-    dark: deepOrange[800],
+    light: '#dc2626',
+    dark: '#f87171',
   },
   white: {
-    light: '#fff',
-    dark: '#fff',
+    light: '#ffffff',
+    dark: '#ffffff',
   },
   black: {
-    light: '#000',
-    dark: '#000',
+    light: '#000000',
+    dark: '#000000',
   },
   ...elementPalette,
 } as const;

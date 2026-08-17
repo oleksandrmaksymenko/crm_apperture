@@ -1,3 +1,4 @@
+import {forwardRef} from 'react';
 import {StyledPaper} from './Paper.styled.tsx';
 import {SpacingType, ThemeColorType} from '../../global.types.ts';
 
@@ -11,6 +12,10 @@ export type PaperProps = {
     bg: ThemeColorType;
   }>;
 
-const Paper = (props: PaperProps) => <StyledPaper {...props} />;
+const Paper = forwardRef<HTMLDivElement, PaperProps>((props, ref) => (
+  <StyledPaper ref={ref} {...props} />
+));
+
+Paper.displayName = 'Paper';
 
 export default Paper;
